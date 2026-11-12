@@ -268,7 +268,29 @@ footer img{height:36px;width:auto}
 /* aparición */
 .js .rev{opacity:0;translate:0 26px;transition:opacity .7s ease,translate .7s ease}
 .js .rev.ver{opacity:1;translate:0 0}
+/* Curita animada: cada pose entra cuando aparece en pantalla y después sigue con su propio movimiento */
+.cur{transform-origin:50% 100%;cursor:pointer;transition:rotate .25s ease;-webkit-tap-highlight-color:transparent}
+.js .cur{opacity:0}
+.cur.entra{opacity:1}
+.cur.presenta.entra{animation:popIn .8s cubic-bezier(.34,1.56,.64,1) both,saluda 3.2s ease-in-out .8s infinite}
+.cur.mate.entra{animation:subeAbajo .7s cubic-bezier(.34,1.4,.64,1) both,matea 4.5s ease-in-out .7s infinite}
+.cur.idea.entra{animation:bajaArriba .7s cubic-bezier(.34,1.5,.64,1) both,piensa 2.6s ease-in-out .7s infinite}
+.cur.festejo.entra{animation:popIn .7s cubic-bezier(.34,1.56,.64,1) both,salta 1.6s cubic-bezier(.3,0,.4,1) .7s infinite}
+.cur.toca{animation-play-state:paused}
+.cur.toca,.cur:hover{rotate:-6deg}
+.cur.gira{animation:giro .6s ease both!important}
+@keyframes popIn{0%{opacity:0;scale:.3;translate:0 30px}100%{opacity:1;scale:1;translate:0 0}}
+@keyframes subeAbajo{0%{opacity:0;translate:0 60px}100%{opacity:1;translate:0 0}}
+@keyframes bajaArriba{0%{opacity:0;translate:0 -50px}100%{opacity:1;translate:0 0}}
+@keyframes saluda{0%,100%{translate:0 0;rotate:0deg}25%{translate:0 -6px;rotate:-3deg}50%{translate:0 0;rotate:0deg}75%{translate:0 -4px;rotate:3deg}}
+@keyframes matea{0%,60%,100%{rotate:0deg;translate:0 0}70%{rotate:-7deg;translate:0 -3px}80%{rotate:-7deg;translate:0 -3px}90%{rotate:2deg;translate:0 0}}
+@keyframes piensa{0%,100%{translate:0 0;rotate:0deg}50%{translate:0 -8px;rotate:4deg}}
+@keyframes salta{0%,100%{translate:0 0;scale:1 1}10%{scale:1.06 .92}40%{translate:0 -22px;scale:.96 1.05}60%{translate:0 -22px;scale:1 1}85%{translate:0 0;scale:1.05 .94}}
+@keyframes giro{0%{rotate:0deg;scale:1}50%{rotate:-12deg;scale:1.12}100%{rotate:0deg;scale:1}}
+
 @media (prefers-reduced-motion:reduce){
+  .js .cur{opacity:1}
+  .cur.entra,.cur.gira{animation:none!important}
   html{scroll-behavior:auto}
   .js .rev{opacity:1;translate:none;transition:none}
   .marquesina div,.panel.activo{animation:none}
@@ -319,7 +341,7 @@ footer img{height:36px;width:auto}
         </div>
       </div>
       <div class="cuenta" id="cuenta"><div class="txt" id="cPre">Faltan</div><div class="num" id="cDias">–</div><div class="txt" id="cTxt">días</div></div>
-      <img class="curita-hero" src="img/curita-presenta.webp" alt="" aria-hidden="true" width="300" height="381">
+      <img class="curita-hero cur presenta" src="img/curita-presenta.webp" alt="" aria-hidden="true" width="300" height="381">
     </div>
   </div>
   <div class="marquesina" aria-hidden="true"><div>+ Sumamos + Sumamos + Sumamos + Sumamos + Sumamos + Sumamos + Sumamos + Sumamos + Sumamos + Sumamos + Sumamos + Sumamos&nbsp;</div></div>
@@ -344,7 +366,7 @@ footer img{height:36px;width:auto}
           Creemos que los cambios se construyen entre todos, con participación, compromiso y trabajo en equipo.
           <div class="valores"><span class="cinta verde">+ Participación</span><span class="cinta rojo">+ Compromiso</span><span class="cinta verde">+ Trabajo en equipo</span></div>
         </div>
-        <img class="curita" src="img/curita-mate.webp" alt="" aria-hidden="true" loading="lazy" width="309" height="420">
+        <img class="curita cur mate" src="img/curita-mate.webp" alt="" aria-hidden="true" loading="lazy" width="309" height="420">
       </div>
     </div>
   </div>
@@ -385,7 +407,7 @@ footer img{height:36px;width:auto}
       </form>
       <div id="resPadron" class="res" aria-live="polite" hidden></div>
       <p class="fuente">Padrón definitivo AEE 2026: estudiantes regulares activos de la Licenciatura en Enfermería, sede Posadas.</p>
-      <img class="curita-p" src="img/curita-idea.webp" alt="" aria-hidden="true" loading="lazy" width="240" height="417">
+      <img class="curita-p cur idea" src="img/curita-idea.webp" alt="" aria-hidden="true" loading="lazy" width="240" height="417">
     </div>
   </div>
 </section>
@@ -450,7 +472,7 @@ footer img{height:36px;width:auto}
       <a class="btn btn-verde" href="https://www.instagram.com/sumarenfermeria/" target="_blank" rel="noopener">Seguinos en Instagram</a>
       <button class="btn btn-rojo" id="btnCompartir" type="button">Compartir con tu curso</button>
     </div>
-    <img class="curita" src="img/curita-festejo.webp" alt="" aria-hidden="true" loading="lazy" width="337" height="420">
+    <img class="curita cur festejo" src="img/curita-festejo.webp" alt="" aria-hidden="true" loading="lazy" width="337" height="420">
   </div>
 </section>
 </main>
@@ -658,6 +680,18 @@ fBuzon.addEventListener('submit', async ev => {
     bNota.className = 'buzon-nota ok'; bNota.textContent = 'Se abrió WhatsApp con tu mensaje listo: solo tocá enviar. ¡Gracias!';
   }
 });
+
+// Curita: entra al aparecer en pantalla y da un giro si la tocás
+const curitas = document.querySelectorAll('.cur');
+if ('IntersectionObserver' in window) {
+  const ioC = new IntersectionObserver(es => es.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('entra'); ioC.unobserve(e.target); } }), { threshold:.3 });
+  curitas.forEach(c => ioC.observe(c));
+} else curitas.forEach(c => c.classList.add('entra'));
+curitas.forEach(c => c.addEventListener('click', () => {
+  c.classList.remove('gira'); void c.offsetWidth; c.classList.add('gira');
+  setTimeout(() => c.classList.remove('gira'), 650);
+}));
 
 // Compartir
 document.getElementById('btnCompartir').addEventListener('click', async () => {
