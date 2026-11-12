@@ -55,9 +55,16 @@ a{color:inherit}
 .nav{position:sticky;top:0;z-index:50;background:rgba(244,242,238,.9);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);transition:box-shadow .3s}
 .nav.scrolled{box-shadow:0 1px 0 rgba(23,64,43,.12)}
 .nav .wrap{display:flex;align-items:center;justify-content:space-between;height:66px;gap:12px}
-.nav .marca{display:flex;align-items:center;gap:12px;text-decoration:none}
-.nav .marca img{height:40px;width:auto}
-.nav .marca .n10{font-family:'Archivo';font-weight:900;background:var(--rojo);color:#fff;border-radius:10px;padding:5px 9px;font-size:15px;line-height:1}
+.nav .marca{display:flex;align-items:center;gap:10px;text-decoration:none;min-width:0}
+.nav .marca .iso{height:50px;width:auto;flex-shrink:0}
+.nav .marca .word{width:clamp(120px,22vw,250px);height:auto;flex-shrink:1;min-width:0}
+.nav .marca .n10{position:relative;flex-shrink:0;font-family:'Archivo';font-weight:900;background:var(--rojo);color:#fff;border-radius:10px;padding:6px 10px 5px;font-size:16px;line-height:1;margin-left:4px;animation:llamaAtencion 2.6s ease-in-out infinite}
+.nav .marca .n10::after{content:"";position:absolute;inset:0;border-radius:inherit;box-shadow:0 0 0 0 rgba(210,50,58,.55);animation:onda 2.6s ease-out infinite}
+@keyframes llamaAtencion{0%,55%,100%{scale:1;rotate:0deg}62%{scale:1.18;rotate:-6deg}69%{scale:1.18;rotate:6deg}76%{scale:1.12;rotate:-4deg}83%{scale:1.05;rotate:2deg}90%{scale:1;rotate:0deg}}
+@keyframes onda{0%,55%{box-shadow:0 0 0 0 rgba(210,50,58,.55)}95%,100%{box-shadow:0 0 0 14px rgba(210,50,58,0)}}
+@media (max-width:1100px){.nav .marca .word{width:clamp(96px,38vw,250px);min-width:96px}}
+@media (max-width:860px){.nav .marca .iso{height:42px}.nav .marca .n10{font-size:14px;padding:5px 8px 4px}}
+@media (prefers-reduced-motion:reduce){.nav .marca .n10,.nav .marca .n10::after{animation:none}}
 .nav ul{list-style:none;display:flex;gap:2px;margin:0;padding:0}
 .nav ul a{display:block;padding:10px 14px;border-radius:999px;text-decoration:none;font-weight:700;font-size:15px;color:var(--texto-2)}
 .nav ul a:hover{background:var(--crema);color:var(--texto)}
@@ -65,7 +72,7 @@ a{color:inherit}
 .nav ul .cta:hover{background:var(--verde-osc);color:#fff}
 .menu-btn{display:none;width:46px;height:46px;border:0;background:var(--crema);border-radius:12px;cursor:pointer;color:var(--texto)}
 .menu-btn svg{width:22px;height:22px}
-@media (max-width:860px){
+@media (max-width:1100px){
   .menu-btn{display:grid;place-items:center}
   .nav ul{position:absolute;top:66px;left:0;right:0;flex-direction:column;background:var(--papel);padding:8px 20px 20px;box-shadow:0 12px 20px -12px rgba(0,0,0,.2);display:none}
   .nav ul.abierto{display:flex}
@@ -97,6 +104,7 @@ a{color:inherit}
 .cuenta .num{font-family:'Archivo';font-weight:900;font-size:44px;line-height:1}
 .cuenta .txt{font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.06em}
 .curita-hero{position:absolute;right:-50px;bottom:-10px;width:150px;z-index:2;filter:drop-shadow(0 10px 12px rgba(0,0,0,.2))}
+@media (max-width:1240px){.curita-hero{right:-8px}}
 .foto-recorte .etiquetas{z-index:3}
 .ola{display:block;width:100%;height:auto;margin-top:-2px}
 .marquesina{background:var(--verde);color:var(--crema);overflow:hidden;white-space:nowrap;padding:6px 0 14px;margin-top:-1px}
@@ -303,7 +311,7 @@ footer img{height:36px;width:auto}
 <nav class="nav" id="nav">
   <div class="wrap">
     <a class="marca" href="#inicio" aria-label="Sumar Enfermería, Lista 10, ir al inicio">
-      <img src="img/logo-color.webp" alt="Sumar Enfermería" width="57" height="40"><span class="n10">LISTA 10</span>
+      <img class="iso" src="img/isotipo.webp" alt="" width="108" height="112"><img class="word" src="img/wordmark.webp" alt="Sumar Enfermería" width="637" height="64"><span class="n10">LISTA 10</span>
     </a>
     <button class="menu-btn" id="menuBtn" aria-label="Abrir menú" aria-expanded="false" aria-controls="menu">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
