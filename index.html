@@ -255,6 +255,19 @@ section{padding:84px 0;position:relative}
 @media (max-width:560px){.buzon .fila{grid-template-columns:1fr}.buzon{padding:30px 18px 24px}}
 .cierre .buzon p.buzon-nota{margin:12px 0 0;font-size:15px;max-width:none;min-height:1em}
 .buzon-nota.ok{color:var(--verde)} .buzon-nota.error{color:var(--rojo)}
+.sorteo{max-width:960px;margin:6px auto 34px;display:grid;grid-template-columns:1fr 1.1fr;gap:20px;align-items:center;text-align:left;background:#fff;border-radius:12px;padding:28px 26px;box-shadow:0 18px 40px -26px rgba(23,64,43,.45)}
+.sorteo .cinta{font-size:clamp(24px,4vw,34px)}
+.sorteo-t{margin:12px 0 6px;font-family:'Archivo';font-weight:900;text-transform:uppercase;font-size:clamp(24px,3.6vw,34px);line-height:1.05;color:var(--verde)}
+.cierre .sorteo p{margin:0 0 10px;font-size:17px;max-width:none;color:var(--texto-2);font-weight:600}
+.sorteo-premios{list-style:none;margin:0 0 18px;padding:0;display:grid;gap:6px;font-weight:700;font-size:16.5px}
+.sorteo-premios li::before{content:"+ ";color:var(--rojo);font-family:'Archivo';font-weight:900}
+.sorteo-premios b{font-family:'Archivo';font-weight:900;color:var(--rojo)}
+.sorteo-img{width:100%;height:auto}
+@media (max-width:760px){.sorteo{grid-template-columns:1fr}.sorteo-img{order:-1}}
+.check-sorteo{display:flex;align-items:center;gap:10px;margin:0 0 14px;font-weight:800;cursor:pointer;min-height:44px}
+.check-sorteo input{width:22px;height:22px;accent-color:var(--rojo)}
+.campo-sorteo{margin:0 0 18px}
+.campo-sorteo small{display:block;margin-top:6px;color:var(--texto-2);font-size:13.5px}
 footer{background:var(--verde);color:var(--crema);padding:26px 0;font-size:15px;font-weight:600}
 footer .wrap{display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap}
 footer img{height:36px;width:auto}
@@ -321,6 +334,7 @@ footer img{height:36px;width:auto}
       <li><a href="#propuestas">Propuestas</a></li>
       <li><a href="#candidatos">Candidatos</a></li>
       <li><a href="#padron">Padrón</a></li>
+      <li><a href="#sorteo">Sorteo</a></li>
       <li><a href="#buzon">Buzón</a></li>
       <li><a class="cta" href="#votar">Cómo votar</a></li>
     </ul>
@@ -448,6 +462,20 @@ footer img{height:36px;width:auto}
     <p>Estas propuestas son el comienzo. Queremos construir el resto con vos.</p>
   </div>
   <div class="wrap">
+    <div class="sorteo rev" id="sorteo">
+      <div class="sorteo-txt">
+        <span class="cinta rojo giro-1">Sorteo</span>
+        <h2 class="sorteo-t">Dejá tu mensaje y participá</h2>
+        <p>Entre quienes dejen una propuesta, comentario o inquietud en el buzón sorteamos:</p>
+        <ul class="sorteo-premios">
+          <li><b>2</b> cuadernos de prácticas de Sumar</li>
+          <li><b>2</b> vasos térmicos de Sumar para el verano</li>
+          <li><b>1</b> agenda para tus prácticas</li>
+        </ul>
+        <a class="btn btn-rojo" href="#buzon">Quiero participar</a>
+      </div>
+      <img class="sorteo-img" src="img/premios.webp" alt="Premios: cuaderno de prácticas, dos vasos térmicos y una agenda de enfermería" width="843" height="413" loading="lazy">
+    </div>
     <form class="buzon rev" id="buzon" novalidate>
       <span class="cinta-adhesiva" aria-hidden="true"></span>
       <h2 class="buzon-t">Buzón de propuestas</h2>
@@ -470,6 +498,12 @@ footer img{height:36px;width:auto}
           <label class="campo" for="bNombre">Tu nombre <small>(opcional)</small></label>
           <input id="bNombre" maxlength="60" placeholder="Podés dejarlo vacío" autocomplete="name">
         </div>
+      </div>
+      <label class="check-sorteo"><input type="checkbox" id="bSorteo"><span>Quiero participar del sorteo</span></label>
+      <div class="campo-sorteo" id="bSorteoCampo" hidden>
+        <label class="campo" for="bContacto">Tu WhatsApp o Instagram, para avisarte si ganás</label>
+        <input id="bContacto" maxlength="60" placeholder="Ej: 3764 123456 o @tuusuario">
+        <small>Solo lo usamos para el sorteo. Si no participás, tu mensaje sigue siendo anónimo.</small>
       </div>
       <button class="btn btn-rojo" type="submit" id="bEnviar">Enviar al buzón</button>
       <p class="buzon-nota" id="bNota" aria-live="polite"></p>
@@ -664,12 +698,21 @@ document.getElementById('formPadron').addEventListener('submit', async ev => {
 const BUZON = { url:'https://docs.google.com/forms/d/e/1FAIpQLSdmqDWNSzZMjH5Wsq9943r0TIrBdBBvQpunkHFPOLBQQfZElQ/formResponse',
   campos:{ tipo:'entry.558434914', mensaje:'entry.1995672025', anio:'entry.1199842249', nombre:'entry.1868286662' } };
 const fBuzon = document.getElementById('buzon'), bNota = document.getElementById('bNota'), bEnviar = document.getElementById('bEnviar');
+const bSorteo = document.getElementById('bSorteo');
+bSorteo.addEventListener('change', () => { document.getElementById('bSorteoCampo').hidden = !bSorteo.checked; if (bSorteo.checked) document.getElementById('bContacto').focus(); });
 if (!BUZON.url) bEnviar.textContent = 'Enviar por WhatsApp';
 fBuzon.addEventListener('submit', async ev => {
   ev.preventDefault();
   const tipo = fBuzon.querySelector('input[name=tipo]:checked').value;
   const msg = document.getElementById('bMsg').value.trim();
-  const anio = document.getElementById('bAnio').value, nombre = document.getElementById('bNombre').value.trim();
+  const anio = document.getElementById('bAnio').value;
+  let nombre = document.getElementById('bNombre').value.trim();
+  if (bSorteo.checked) {
+    const contacto = document.getElementById('bContacto').value.trim();
+    if (contacto.length < 4) { bNota.className = 'buzon-nota error'; bNota.textContent = 'Para el sorteo, dejanos tu WhatsApp o Instagram.'; document.getElementById('bContacto').focus(); return; }
+    if (!nombre) { bNota.className = 'buzon-nota error'; bNota.textContent = 'Para el sorteo, poné también tu nombre.'; document.getElementById('bNombre').focus(); return; }
+    nombre = `SORTEO · ${nombre} · ${contacto}`;
+  }
   if (msg.length < 5) { bNota.className = 'buzon-nota error'; bNota.textContent = 'Escribí tu mensaje antes de enviarlo.'; document.getElementById('bMsg').focus(); return; }
   if (BUZON.url) {
     const datos = new URLSearchParams();
@@ -679,7 +722,7 @@ fBuzon.addEventListener('submit', async ev => {
     bEnviar.disabled = true; bEnviar.textContent = 'Enviando…';
     try {
       await fetch(BUZON.url, { method:'POST', mode:'no-cors', body:datos });
-      fBuzon.reset(); bNota.className = 'buzon-nota ok'; bNota.textContent = '¡Gracias! Tu mensaje llegó al buzón. 💚';
+      fBuzon.reset(); document.getElementById('bSorteoCampo').hidden = true; bNota.className = 'buzon-nota ok'; bNota.textContent = '¡Gracias! Tu mensaje llegó al buzón. 💚';
     } catch (e) { bNota.className = 'buzon-nota error'; bNota.textContent = 'No se pudo enviar. Revisá tu conexión y probá de nuevo.'; }
     finally { bEnviar.disabled = false; bEnviar.textContent = 'Enviar al buzón'; }
   } else {
