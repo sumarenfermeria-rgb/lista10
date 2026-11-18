@@ -1,0 +1,365 @@
+<!doctype html>
+<html lang="es-AR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hoy votamos · Elecciones AEE Enfermería</title>
+<meta name="description" content="Cuántos estudiantes ya votaron, en vivo. Horario, dónde votar y buscador del padrón. Elecciones de la Asociación de Estudiantes de Enfermería, jueves 19/11.">
+<meta property="og:title" content="🗳️ Hoy votamos: mirá cuántos ya votaron">
+<meta property="og:description" content="Conteo en vivo, horario y buscador del padrón. Jueves 19/11, de 8 a 20 h, Escuela de Enfermería.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://sumarenfermeria-rgb.github.io/lista10/hoy.html">
+<meta property="og:image" content="https://sumarenfermeria-rgb.github.io/lista10/img/og.jpg">
+<meta name="theme-color" content="#1E7A4A">
+<link rel="icon" href="img/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@800;900&family=Figtree:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--verde:#1E7A4A;--verde-osc:#14563A;--tinta:#17402B;--rojo:#D2323A;--rojo-osc:#A8262E;--papel:#F4F2EE;--crema:#EFE8D8;--texto-2:#4A6B58;--menta:#CFEBDB}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;font-family:'Figtree',system-ui,sans-serif;color:var(--tinta);background:var(--papel);line-height:1.45}
+img{max-width:100%;height:auto}
+.wrap{max-width:760px;margin:0 auto;padding:0 16px}
+.top{background:var(--verde);color:#fff;padding:14px 0}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.top img{height:40px;width:auto}
+.top a{color:#fff;font-weight:800;font-size:14px;text-decoration:none;border:2px solid rgba(255,255,255,.5);border-radius:999px;padding:7px 14px;white-space:nowrap}
+.hero{background:var(--verde);color:#fff;padding:8px 0 70px;position:relative;overflow:hidden}
+.hero::after{content:'+';position:absolute;right:-60px;top:-60px;font:900 380px/1 'Archivo';color:rgba(255,255,255,.06)}
+h1{font:900 clamp(38px,10vw,64px)/.95 'Archivo';text-transform:uppercase;margin:10px 0 14px;position:relative;z-index:1}
+.estado{display:inline-flex;align-items:center;gap:10px;background:rgba(0,0,0,.18);border-radius:999px;padding:9px 16px;font-weight:800;font-size:16px;position:relative;z-index:1}
+.estado i{width:12px;height:12px;border-radius:50%;background:#9FE3B8;box-shadow:0 0 0 0 rgba(159,227,184,.8);animation:late 1.8s infinite}
+.estado.cerrado i,.estado.antes i{background:#F6C9CB;animation:none}
+@keyframes late{0%{box-shadow:0 0 0 0 rgba(159,227,184,.8)}70%{box-shadow:0 0 0 12px rgba(159,227,184,0)}100%{box-shadow:0 0 0 0 rgba(159,227,184,0)}}
+.card{background:#fff;border-radius:16px;padding:24px 22px;box-shadow:0 18px 40px -26px rgba(23,64,43,.45);margin-bottom:18px}
+.contador{margin-top:-50px;position:relative;z-index:2;text-align:center}
+.contador .et{font-weight:800;text-transform:uppercase;letter-spacing:.08em;font-size:14px;color:var(--rojo)}
+.contador .n{font:900 clamp(72px,22vw,120px)/1 'Archivo';color:var(--verde);margin:6px 0 0;font-variant-numeric:tabular-nums}
+.contador .u{font:800 20px 'Archivo';text-transform:uppercase}
+.contador .act{font-size:14px;color:var(--texto-2);margin-top:8px}
+.mesas{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:18px}
+.mesa{background:var(--papel);border-radius:12px;padding:12px 8px}
+.mesa b{display:block;font:900 30px/1 'Archivo';color:var(--tinta)}
+.mesa span{font-size:13px;font-weight:700;color:var(--texto-2)}
+.horas{display:flex;align-items:flex-end;gap:5px;height:120px;margin-top:22px;padding-top:6px;border-bottom:2px solid #E2E8E3}
+.horas div{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%;min-width:0}
+.horas i{display:block;width:100%;background:var(--verde);border-radius:6px 6px 0 0;min-height:2px;transition:height .6s}
+.horas div.ahora i{background:var(--rojo)}
+.horas small{font-size:11px;font-weight:700;color:var(--texto-2);margin-top:4px}
+.horas em{font-style:normal;font-size:11px;font-weight:800;color:var(--tinta);margin-bottom:3px}
+.nota{font-size:13px;color:var(--texto-2);margin:10px 0 0}
+h2{font:900 26px/1.05 'Archivo';text-transform:uppercase;margin:0 0 6px}
+h2 .r{color:var(--rojo)}
+.sub{margin:0 0 16px;color:var(--texto-2);font-size:16px}
+.info{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.info div{background:var(--papel);border-radius:12px;padding:12px}
+.info b{display:block;font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:var(--rojo)}
+.info span{font-weight:800;font-size:15.5px;line-height:1.25;display:block;margin-top:2px}
+.boleta{display:grid;grid-template-columns:120px 1fr;gap:16px;align-items:center;margin-top:16px;background:var(--crema);border-radius:12px;padding:14px}
+.boleta img{border-radius:4px;box-shadow:0 8px 18px -10px rgba(0,0,0,.5)}
+.boleta p{margin:0;font-weight:700}
+.boleta .d{display:inline-block;background:var(--tinta);color:#fff;border-radius:6px;padding:1px 8px;font-weight:800}
+.modo{display:flex;gap:8px;margin-bottom:14px;flex-wrap:wrap}
+.modo button{font:800 15px 'Figtree',sans-serif;padding:10px 16px;border-radius:30px;border:2px solid #D9E3DC;background:#fff;color:var(--tinta);cursor:pointer;min-height:44px}
+.modo button.on{background:var(--verde);border-color:var(--verde);color:#fff}
+.buscador form{display:flex;gap:10px;flex-wrap:wrap}
+.buscador form[hidden]{display:none}
+.buscador input{flex:1 1 220px;min-width:0;font:700 20px 'Figtree',sans-serif;padding:13px 15px;border:2px solid #D9E3DC;border-radius:12px;background:var(--papel);color:var(--tinta);min-height:54px}
+.buscador input:focus{outline:none;border-color:var(--verde);box-shadow:0 0 0 4px rgba(30,122,74,.15)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:14px 22px;border-radius:999px;font-family:'Archivo';font-weight:800;text-transform:uppercase;font-size:15px;text-decoration:none;min-height:52px;border:0;cursor:pointer}
+.btn-verde{background:var(--verde);color:#fff}.btn-rojo{background:var(--rojo);color:#fff}
+.btn-wa{background:#1FA855;color:#fff}
+.btn[disabled]{opacity:.7;cursor:progress}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+.res{margin-top:16px;border-radius:12px;padding:18px;animation:entrar .35s ease}
+.res.si{background:#E3F2E9;border:2px solid rgba(30,122,74,.35)}
+.res.no{background:#FCE9EA;border:2px solid rgba(210,50,58,.3)}
+.res h3{margin:0 0 6px;font:900 22px/1.05 'Archivo';text-transform:uppercase}
+.res.si h3{color:var(--verde)}.res.no h3{color:var(--rojo)}
+.res p{margin:0;font-size:16px}
+.res .pills{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0}
+.res .pills span{background:#fff;border-radius:999px;padding:5px 12px;font-size:14.5px;font-weight:600}
+.res ul.lista-n{list-style:none;padding:0;margin:10px 0 12px;display:grid;gap:8px}
+.res ul.lista-n li{background:#fff;border-radius:10px;padding:10px 12px;font-weight:700;display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap}
+.res ul.lista-n li .o{font-weight:600;color:var(--texto-2);font-size:14px}
+.res ul.lista-n li a{font-size:13px;min-height:40px;padding:8px 14px}
+.res .wa{margin-top:12px}
+.acciones{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}
+.acciones .btn{min-height:48px;padding:11px 18px;font-size:14px}
+@keyframes entrar{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+.avisar textarea{width:100%;font:600 16px/1.4 'Figtree',sans-serif;padding:12px;border:2px solid #D9E3DC;border-radius:12px;background:var(--papel);color:var(--tinta);min-height:150px;resize:vertical}
+.avisar .btn{margin-top:12px;width:100%}
+footer{text-align:center;padding:10px 16px 40px;font-size:14px;color:var(--texto-2)}
+footer a{color:var(--verde);font-weight:800}
+@media (max-width:520px){.info{grid-template-columns:1fr}.boleta{grid-template-columns:96px 1fr}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<header class="top"><div class="wrap"><img src="img/logo-blanco.webp" alt="Sumar Enfermería" width="240" height="171"><a href="./">Ver propuestas</a></div></header>
+
+<section class="hero"><div class="wrap">
+  <h1>Hoy<br>votamos</h1>
+  <div class="estado" id="estado"><i></i><span id="estadoTxt">Elecciones AEE · Jueves 19/11</span></div>
+</div></section>
+
+<main class="wrap">
+  <div class="card contador" aria-live="polite">
+    <div class="et">En vivo · Elecciones AEE Enfermería</div>
+    <div class="n" id="total">—</div>
+    <div class="u">estudiantes ya votaron</div>
+    <div class="act" id="act">El conteo arranca cuando abren las mesas, a las 8.</div>
+    <div class="mesas" id="mesas">
+      <div class="mesa"><b id="m1">—</b><span>Mesa 1</span></div>
+      <div class="mesa"><b id="m2">—</b><span>Mesa 2</span></div>
+      <div class="mesa"><b id="m3">—</b><span>Mesa 3</span></div>
+    </div>
+    <div class="horas" id="horas" aria-label="Votantes por hora"></div>
+    <p class="nota">Lo cargan los fiscales de mesa. Se actualiza solo, sin recargar la página.</p>
+  </div>
+
+  <div class="card">
+    <h2>¿Todavía <span class="r">no votaste?</span></h2>
+    <p class="sub">Es rápido: llevá tu DNI y en 5 minutos estás.</p>
+    <div class="info">
+      <div><b>Cuándo</b><span>Hoy, de 8 a 20 h</span></div>
+      <div><b>Dónde</b><span>Escuela de Enfermería · López Torres y Mariano Moreno</span></div>
+      <div><b>Qué llevar</b><span>Tu DNI</span></div>
+    </div>
+    <div class="boleta">
+      <a href="img/boleta-grande.jpg?v=2" target="_blank" rel="noopener"><img src="img/boleta.jpg?v=2" alt="Boleta Lista 10, Identidad Estudiantil" width="400" height="613"></a>
+      <p>Si nos acompañás, buscá la boleta <span class="d">Lista 10</span>. En la boleta figuramos como <b>Identidad Estudiantil</b>.</p>
+    </div>
+  </div>
+
+  <div class="card buscador" id="padron">
+    <h2>Buscá en <span class="r">el padrón</span></h2>
+    <p class="sub">Fijate si vos o un compañero pueden votar, y avisale por WhatsApp.</p>
+    <div class="modo" role="group" aria-label="Buscar por">
+      <button type="button" class="on" data-m="nombre" aria-pressed="true">Por apellido y nombre</button>
+      <button type="button" data-m="dni" aria-pressed="false">Por DNI</button>
+    </div>
+    <form id="formNombre" autocomplete="off">
+      <label for="pAp" class="sr">Apellido</label>
+      <input id="pAp" placeholder="Apellido" maxlength="40" autocapitalize="words" autocorrect="off" spellcheck="false">
+      <label for="pNom" class="sr">Nombre</label>
+      <input id="pNom" placeholder="Nombre o sus primeras letras" maxlength="40" autocapitalize="words" autocorrect="off" spellcheck="false">
+      <button class="btn btn-rojo" id="btnBuscarN" type="submit">Buscar</button>
+    </form>
+    <form id="formPadron" autocomplete="off" hidden>
+      <label for="dni" class="sr">Número de documento</label>
+      <input id="dni" inputmode="numeric" pattern="[0-9.\s]*" placeholder="Ej: 45123456" maxlength="12">
+      <button class="btn btn-rojo" id="btnBuscar" type="submit">Buscar</button>
+    </form>
+    <div id="resPadron" class="res" aria-live="polite" hidden></div>
+  </div>
+
+  <div class="card avisar">
+    <h2>Avisale a <span class="r">tu curso</span></h2>
+    <p class="sub">Mandá este mensaje a tu grupo o a un compañero. Podés cambiarlo antes de enviar.</p>
+    <label for="msg" class="sr">Mensaje</label>
+    <textarea id="msg"></textarea>
+    <a class="btn btn-wa" id="btnMsg" target="_blank" rel="noopener">Enviar por WhatsApp</a>
+  </div>
+</main>
+<footer>Sumar Enfermería · Lista 10 · <a href="./">Ver propuestas y candidatos</a></footer>
+
+<script>
+// ===== Conteo en vivo =====
+// FUENTE: link "Publicar en la web" (formato CSV) de la planilla del conteo. Columnas: Hora | Mesa 1 | Mesa 2 | Mesa 3
+// Cada fila es un corte: la hora y cuántos votaron hasta ese momento en cada mesa (acumulado). Celda vacía = sigue igual.
+const FUENTE = '';
+const CADA = 60000;                 // se vuelve a leer cada 1 minuto
+const ABRE = 8, CIERRA = 20;        // horario de votación (hora de Argentina)
+const DEMO = new URLSearchParams(location.search).has('demo');
+
+const ahoraAR = () => { const d = new Date(Date.now() - 3 * 3600e3); return { h: d.getUTCHours(), m: d.getUTCMinutes(), dia: d.toISOString().slice(0, 10) }; };
+function pintarEstado(){
+  const { h, m, dia } = ahoraAR(), el = document.getElementById('estado'), t = document.getElementById('estadoTxt');
+  const min = h * 60 + m;
+  if (dia < '2026-11-19') { el.className = 'estado antes'; t.textContent = 'Votamos el jueves 19/11, de 8 a 20 h'; return; }
+  if (dia > '2026-11-19' || min >= CIERRA * 60) { el.className = 'estado cerrado'; t.textContent = 'Cerró la votación · ¡Gracias por participar!'; return; }
+  if (min < ABRE * 60) { el.className = 'estado antes'; t.textContent = `Abre a las 8 · faltan ${fmt(ABRE * 60 - min)}`; return; }
+  el.className = 'estado'; t.textContent = `Votación abierta · cierra en ${fmt(CIERRA * 60 - min)}`;
+}
+const fmt = x => x >= 60 ? `${Math.floor(x / 60)} h ${String(x % 60).padStart(2, '0')} min` : `${x} min`;
+
+function parseCSV(txt){
+  const filas = []; let f = [], c = '', q = false;
+  for (let i = 0; i < txt.length; i++){
+    const ch = txt[i];
+    if (q){ if (ch === '"'){ if (txt[i + 1] === '"'){ c += '"'; i++; } else q = false; } else c += ch; }
+    else if (ch === '"') q = true;
+    else if (ch === ','){ f.push(c); c = ''; }
+    else if (ch === '\n' || ch === '\r'){ if (ch === '\r' && txt[i + 1] === '\n') i++; f.push(c); filas.push(f); f = []; c = ''; }
+    else c += ch;
+  }
+  if (c || f.length){ f.push(c); filas.push(f); }
+  return filas;
+}
+const num = s => { const n = parseInt(String(s || '').replace(/\D/g, ''), 10); return isNaN(n) ? null : n; };
+const hora = s => { const m = String(s || '').match(/(\d{1,2})[:.h](\d{2})?/); return m ? +m[1] + (+(m[2] || 0)) / 60 : null; };
+
+let mostrado = 0;
+function animar(el, a, b){
+  const t0 = performance.now(), d = 900;
+  (function paso(t){ const p = Math.min(1, (t - t0) / d), e = 1 - Math.pow(1 - p, 3); el.textContent = Math.round(a + (b - a) * e).toLocaleString('es-AR'); if (p < 1) requestAnimationFrame(paso); })(t0);
+}
+function pintar(cortes){
+  // cortes: [{h, m:[m1,m2,m3]}] en orden; arrastra el último valor de cada mesa
+  const ult = [0, 0, 0], serie = [];
+  let ultHora = null;
+  for (const c of cortes){ c.m.forEach((v, i) => { if (v !== null) ult[i] = v; }); serie.push({ h: c.h, t: ult[0] + ult[1] + ult[2] }); if (c.h !== null) ultHora = c.h; }
+  const total = ult[0] + ult[1] + ult[2];
+  if (!cortes.length) return;
+  animar(document.getElementById('total'), mostrado, total); mostrado = total;
+  ult.forEach((v, i) => document.getElementById('m' + (i + 1)).textContent = v.toLocaleString('es-AR'));
+  document.getElementById('act').textContent = ultHora !== null ? `Último dato: ${String(Math.floor(ultHora)).padStart(2, '0')}:${String(Math.round((ultHora % 1) * 60)).padStart(2, '0')} h` : 'Actualizado';
+  // votantes por hora (de 8 a 20): cuántos votaron dentro de cada hora
+  const H = document.getElementById('horas'), acum = [];
+  for (let h = ABRE; h < CIERRA; h++){ let v = 0; for (const s of serie) if (s.h !== null && s.h <= h + 1) v = s.t; acum.push(v); }
+  const por = acum.map((v, i) => Math.max(0, v - (i ? acum[i - 1] : 0)));
+  const max = Math.max(1, ...por), hAhora = ahoraAR().h;
+  H.innerHTML = por.map((v, i) => `<div class="${ABRE + i === hAhora ? 'ahora' : ''}"><em>${v || ''}</em><i style="height:${Math.round(v / max * 80)}%"></i><small>${ABRE + i}</small></div>`).join('');
+}
+async function leer(){
+  pintarEstado();
+  try {
+    let txt;
+    if (DEMO) txt = 'Hora,Mesa 1,Mesa 2,Mesa 3\n9:00,31,24,28\n10:00,78,66,71\n11:00,140,118,125\n12:00,201,177,190\n13:00,236,215,231';
+    else if (FUENTE) txt = await (await fetch(FUENTE + (FUENTE.includes('?') ? '&' : '?') + 't=' + Date.now(), { cache: 'no-store' })).text();
+    else return;
+    const filas = parseCSV(txt).filter(f => f.some(x => String(x).trim()));
+    const cortes = filas.slice(1).map(f => ({ h: hora(f[0]), m: [num(f[1]), num(f[2]), num(f[3])] })).filter(c => c.m.some(v => v !== null));
+    pintar(cortes);
+  } catch (e) { document.getElementById('act').textContent = 'No pudimos actualizar. Probamos de nuevo en un minuto.'; }
+}
+leer(); setInterval(leer, CADA);
+if (!FUENTE && !DEMO) document.getElementById('horas').innerHTML = Array.from({ length: CIERRA - ABRE }, (_, i) => `<div><em></em><i style="height:0"></i><small>${ABRE + i}</small></div>`).join('');
+
+// ===== Mensaje para el curso =====
+const LINK = 'https://sumarenfermeria-rgb.github.io/lista10/hoy.html';
+const msg = document.getElementById('msg'), btnMsg = document.getElementById('btnMsg');
+msg.value = `¡Hoy votamos! 🗳️ Elecciones de la Asociación de Estudiantes de Enfermería.\n\n🕗 Hasta las 20 h\n📍 Escuela de Enfermería (López Torres y Mariano Moreno)\n🪪 Llevá tu DNI\n\nFijate si estás en el padrón y mirá cuántos ya votaron acá 👉 ${LINK}`;
+const armarWa = () => btnMsg.href = 'https://wa.me/?text=' + encodeURIComponent(msg.value);
+msg.addEventListener('input', armarWa); armarWa();
+
+// Mensaje para avisarle a un compañero que está en el padrón
+const avisoWa = p => 'https://wa.me/?text=' + encodeURIComponent(`¡Hola ${p[2].split(' ')[0]}! 👋 Hoy votamos en las elecciones de la Asociación de Estudiantes de Enfermería 🗳️
+Me fijé y estás en el padrón (Nº de orden ${p[0]}).
+🕗 Hasta las 20 h · 📍 Escuela de Enfermería · 🪪 Llevá tu DNI
+👉 https://sumarenfermeria-rgb.github.io/lista10/hoy.html`);
+// Padrón: cada registro está cifrado con el propio documento (PBKDF2 + AES-GCM).
+// Sin el número exacto no se puede leer nada; la lista completa nunca se publica.
+const S1 = new TextEncoder().encode('sumar-lista10-aee-2026|id'), S2 = new TextEncoder().encode('sumar-lista10-aee-2026|key');
+let padronP = null;
+const cargarPadron = () => padronP || (padronP = new Promise((ok, ko) => {
+  const s = document.createElement('script'); s.src = 'padron.js';
+  s.onload = () => ok(window.PADRON); s.onerror = ko; document.head.appendChild(s);
+}));
+let ITER = 20000;
+async function derivar(doc, sal, bytes){
+  const base = await crypto.subtle.importKey('raw', new TextEncoder().encode(doc), 'PBKDF2', false, ['deriveBits']);
+  return new Uint8Array(await crypto.subtle.deriveBits({ name:'PBKDF2', hash:'SHA-256', salt:sal, iterations:ITER }, base, bytes * 8));
+}
+async function buscarDoc(doc){
+  const P = await cargarPadron(); ITER = P.it || 20000;
+  const id = [...await derivar(doc, S1, 16)].map(b => b.toString(16).padStart(2, '0')).join('');
+  const blob = P.d[id]; if (!blob) return null;
+  const raw = Uint8Array.from(atob(blob), c => c.charCodeAt(0));
+  const key = await crypto.subtle.importKey('raw', await derivar(doc, S2, 32), 'AES-GCM', false, ['decrypt']);
+  return JSON.parse(new TextDecoder().decode(await crypto.subtle.decrypt({ name:'AES-GCM', iv:raw.slice(0, 12) }, key, raw.slice(12))));
+}
+const res = document.getElementById('resPadron'), inDni = document.getElementById('dni'), btnB = document.getElementById('btnBuscar');
+const WA = '5493765124340';
+const URL_SITIO = location.origin + location.pathname;
+const CAL = 'https://calendar.google.com/calendar/render?action=TEMPLATE&text=Votar+Lista+10+%C2%B7+Sumar+Enfermer%C3%ADa&dates=20261119T110000Z/20261119T230000Z&details=Elecciones+de+la+Asociaci%C3%B3n+de+Estudiantes+de+Enfermer%C3%ADa.+Llev%C3%A1+tu+DNI+y+vot%C3%A1+Lista+10.&location=Escuela+de+Enfermer%C3%ADa+UNaM%2C+L%C3%B3pez+Torres+y+Mariano+Moreno%2C+Posadas';
+const ICONO_WA = '<svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.6.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6a2.7 2.7 0 0 0 1.8-1.2 2.2 2.2 0 0 0 .1-1.2c0-.1-.2-.2-.4-.3Z"/></svg>';
+const puntos = d => d.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+function mostrar(clase, html){ res.className = 'res ' + clase; res.innerHTML = html; res.hidden = false; }
+inDni.addEventListener('focus', () => cargarPadron().catch(() => {}), { once:true });
+
+// Búsqueda por apellido (con tolerancia a errores de tipeo) + primeras letras del nombre.
+// padron-nombres.js trae solo apellido, nombres y n.º de orden: nunca el DNI. El padrón lo publicó la Junta Electoral.
+const fNom = document.getElementById('formNombre'), fDni = document.getElementById('formPadron');
+document.querySelectorAll('.modo button').forEach(b => b.addEventListener('click', () => {
+  document.querySelectorAll('.modo button').forEach(x => { x.classList.toggle('on', x === b); x.setAttribute('aria-pressed', x === b); });
+  const n = b.dataset.m === 'nombre'; fNom.hidden = !n; fDni.hidden = n; res.hidden = true;
+  (n ? document.getElementById('pAp') : inDni).focus();
+  if (n) cargarNombres().catch(() => {});
+}));
+let nombresP = null;
+const cargarNombres = () => nombresP || (nombresP = new Promise((ok, ko) => {
+  const s = document.createElement('script'); s.src = 'padron-nombres.js?v=2';
+  s.onload = () => ok(window.PADRON_N); s.onerror = () => { nombresP = null; ko(); }; document.head.appendChild(s);
+}));
+const NO_CUENTA = new Set(['de','del','la','las','los','y','da','di','do','dos','van','von','e']);
+const palabras = t => (t || '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '')
+  .split(/[^a-z]+/).filter(w => w.length > 1 && !NO_CUENTA.has(w));
+// Cómo suena (español rioplatense): z/s/ce/ci, v/b, ll/y, h muda, qu/k/c, gue/gui…
+const suena = w => w.replace(/h/g, '').replace(/qu/g, 'k').replace(/c([ei])/g, 's$1').replace(/[ckq]/g, 'k')
+  .replace(/z/g, 's').replace(/v/g, 'b').replace(/ll/g, 'y').replace(/w/g, 'gu').replace(/x/g, 'ks').replace(/(.)\1/g, '$1');
+function dist(a, b){            // Damerau-Levenshtein (con transposición de letras vecinas)
+  const m = a.length, n = b.length, d = [];
+  for (let i = 0; i <= m; i++){ d[i] = [i]; } for (let j = 1; j <= n; j++) d[0][j] = j;
+  for (let i = 1; i <= m; i++) for (let j = 1; j <= n; j++){
+    const c = a[i-1] === b[j-1] ? 0 : 1;
+    d[i][j] = Math.min(d[i-1][j] + 1, d[i][j-1] + 1, d[i-1][j-1] + c);
+    if (i > 1 && j > 1 && a[i-1] === b[j-2] && a[i-2] === b[j-1]) d[i][j] = Math.min(d[i][j], d[i-2][j-2] + 1);
+  }
+  return d[m][n];
+}
+// Qué tan parecido es lo que escribió con un apellido del padrón: 0 = igual; 1-2 = parecido; null = no.
+function parecido(esc, ap){
+  if (esc === ap) return 0;
+  const a = suena(esc), b = suena(ap);
+  if (a === b) return .5;
+  const tope = esc.length <= 4 ? 1 : esc.length <= 7 ? 2 : 3, x = Math.min(dist(esc, ap), dist(a, b) + .5);
+  return x <= tope ? x : null;
+}
+let PER = null;   // personas preparadas: [orden, apellido, nombres, palabras del apellido, palabras del nombre]
+const esc = t => String(t).replace(/[&<>"]/g, c => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;' }[c]));
+const btnN = document.getElementById('btnBuscarN');
+fNom.addEventListener('submit', async ev => {
+  ev.preventDefault();
+  const apT = document.getElementById('pAp').value.trim(), noT = document.getElementById('pNom').value.trim();
+  const A = palabras(apT).slice(0, 2), N = (noT.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').match(/[a-z]+/g) || []).slice(0, 2);
+  if (!A.length || !N.length) { mostrar('no', '<h3>Completá los dos campos</h3><p>Escribí el apellido y el nombre, o al menos sus primeras letras (por ejemplo: Gómez · Ma).</p>'); return; }
+  btnN.disabled = true; btnN.textContent = 'Buscando…';
+  try {
+    const P = await cargarNombres();
+    if (!PER) PER = P.d.map(([o, a, n]) => [o, a, n, palabras(a), palabras(n)]);
+    const cache = new Map(), hall = [];
+    for (const p of PER){
+      // cada palabra del apellido escrito tiene que parecerse a alguna del apellido real
+      let tot = 0, ok = true;
+      for (const w of A){
+        let mejor = null;
+        for (const ap of p[3]){ const k = w + '|' + ap; if (!cache.has(k)) cache.set(k, parecido(w, ap)); const v = cache.get(k); if (v !== null && (mejor === null || v < mejor)) mejor = v; }
+        if (mejor === null){ ok = false; break; } tot += mejor;
+      }
+      // y cada palabra del nombre escrito tiene que ser el comienzo de alguno de sus nombres
+      const empieza = (n, w) => n.startsWith(w) || suena(n).startsWith(suena(w));
+      if (ok && N.every(w => p[4].some(n => empieza(n, w)))) hall.push([tot + (p[4][0] && empieza(p[4][0], N[0]) ? 0 : .25), p]);
+    }
+    hall.sort((x, y) => x[0] - y[0] || x[1][1].localeCompare(y[1][1]) || x[1][0] - y[1][0]);
+    const exactos = hall.filter(h => h[0] < .5).length, MAX = 12;
+    if (hall.length) mostrar('si', `<h3>${hall.length === 1 ? '¡Encontramos a una persona!' : `Encontramos ${hall.length} personas`}</h3>
+      ${exactos < hall.length ? '<p>Te mostramos también apellidos parecidos, por si está escrito distinto.</p>' : ''}
+      <ul class="lista-n">${hall.slice(0, MAX).map(([, p]) => `<li><span>${esc(p[1])}, ${esc(p[2])}<br><span class="o">Nº de orden ${p[0]}</span></span><a class="btn btn-wa" target="_blank" rel="noopener" href="${avisoWa(p)}">Avisale</a></li>`).join('')}</ul>
+      ${hall.length > MAX ? `<p style="margin-bottom:10px">Hay ${hall.length - MAX} más: escribí más letras del nombre para achicar la lista.</p>` : ''}
+      <p>El jueves 19, de 8 a 20 h, en la Escuela de Enfermería, con el DNI. Votá <b>Lista 10</b>. 💚</p>
+      <div class="acciones"><a class="btn btn-verde" href="${CAL}" target="_blank" rel="noopener">Agendar el 19</a></div>`);
+    else mostrar('no', `<h3>No encontramos a ${esc(apT)}, ${esc(noT)}</h3>
+      <p>Probá con menos letras del nombre, revisá el apellido o buscá con el DNI. Si igual no aparece, escribinos y te ayudamos con el reclamo.</p>
+      <a class="btn btn-verde wa" href="https://wa.me/${WA}?text=${encodeURIComponent('Hola! Busqué en el padrón de las elecciones AEE 2026 y no figuro. ¿Me ayudan con el reclamo?')}" target="_blank" rel="noopener">${ICONO_WA}Escribinos por WhatsApp</a>`);
+  } catch (e) {
+    mostrar('no', '<h3>No pudimos buscar</h3><p>Revisá tu conexión a internet y probá de nuevo.</p>');
+  } finally { btnN.disabled = false; btnN.textContent = 'Buscar'; }
+});
+document.getElementById('pAp').addEventListener('focus', () => cargarNombres().catch(() => {}), { once:true });
+</script>
+</body>
+</html>

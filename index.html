@@ -212,7 +212,10 @@ section{padding:84px 0;position:relative}
 .modo button{font:800 15px 'Figtree',sans-serif;padding:10px 16px;border-radius:30px;border:2px solid #D9E3DC;background:#fff;color:var(--tinta);cursor:pointer;min-height:44px}
 .modo button.on{background:var(--verde);border-color:var(--verde);color:#fff}
 .res ul.lista-n{list-style:none;padding:0;margin:10px 0 12px;display:grid;gap:8px}
-.res ul.lista-n li{background:#fff;border-radius:10px;padding:10px 14px;font-weight:700;display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.res ul.lista-n li{background:#fff;border-radius:10px;padding:10px 14px;font-weight:700;display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+.res ul.lista-n li .o{font-weight:600;color:var(--texto-2);font-size:14px}
+.res ul.lista-n li a{font-size:13px;min-height:40px;padding:8px 14px}
+.btn-wa{background:#1FA855;color:#fff}
 .buscador .btn[disabled]{opacity:.7;cursor:progress}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
 .res{margin-top:18px;border-radius:12px;padding:20px 22px;animation:entrar .35s ease}
@@ -661,6 +664,11 @@ const io = 'IntersectionObserver' in window ? new IntersectionObserver(es => es.
   if (e.isIntersecting) { e.target.classList.add('ver'); io.unobserve(e.target); } }), { threshold:.1 }) : null;
 document.querySelectorAll('.rev').forEach(el => io ? io.observe(el) : el.classList.add('ver'));
 
+// Mensaje para avisarle a un compañero que está en el padrón
+const avisoWa = p => 'https://wa.me/?text=' + encodeURIComponent(`¡Hola ${p[2].split(' ')[0]}! 👋 Hoy votamos en las elecciones de la Asociación de Estudiantes de Enfermería 🗳️
+Me fijé y estás en el padrón (Nº de orden ${p[0]}).
+🕗 Hasta las 20 h · 📍 Escuela de Enfermería · 🪪 Llevá tu DNI
+👉 https://sumarenfermeria-rgb.github.io/lista10/hoy.html`);
 // Padrón: cada registro está cifrado con el propio documento (PBKDF2 + AES-GCM).
 // Sin el número exacto no se puede leer nada; la lista completa nunca se publica.
 const S1 = new TextEncoder().encode('sumar-lista10-aee-2026|id'), S2 = new TextEncoder().encode('sumar-lista10-aee-2026|key');
@@ -758,7 +766,7 @@ fNom.addEventListener('submit', async ev => {
     const exactos = hall.filter(h => h[0] < .5).length, MAX = 12;
     if (hall.length) mostrar('si', `<h3>${hall.length === 1 ? '¡Encontramos a una persona!' : `Encontramos ${hall.length} personas`}</h3>
       ${exactos < hall.length ? '<p>Te mostramos también apellidos parecidos, por si está escrito distinto.</p>' : ''}
-      <ul class="lista-n">${hall.slice(0, MAX).map(([, p]) => `<li><span>${esc(p[1])}, ${esc(p[2])}</span><span>Nº de orden <b>${p[0]}</b></span></li>`).join('')}</ul>
+      <ul class="lista-n">${hall.slice(0, MAX).map(([, p]) => `<li><span>${esc(p[1])}, ${esc(p[2])}<br><span class="o">Nº de orden ${p[0]}</span></span><a class="btn btn-wa" target="_blank" rel="noopener" href="${avisoWa(p)}">Avisale</a></li>`).join('')}</ul>
       ${hall.length > MAX ? `<p style="margin-bottom:10px">Hay ${hall.length - MAX} más: escribí más letras del nombre para achicar la lista.</p>` : ''}
       <p>El jueves 19, de 8 a 20 h, en la Escuela de Enfermería, con el DNI. Votá <b>Lista 10</b>. 💚</p>
       <div class="acciones"><a class="btn btn-verde" href="${CAL}" target="_blank" rel="noopener">Agendar el 19</a></div>`);
