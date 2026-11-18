@@ -207,6 +207,12 @@ section{padding:84px 0;position:relative}
 .buscador input{flex:1 1 220px;min-width:0;font:700 22px 'Figtree',sans-serif;letter-spacing:.04em;padding:14px 16px;border:2px solid #D9E3DC;border-radius:12px;background:var(--papel);color:var(--tinta);min-height:56px}
 .buscador input:focus{outline:none;border-color:var(--verde);box-shadow:0 0 0 4px rgba(30,122,74,.15)}
 .buscador .btn{min-height:56px}
+.buscador form[hidden]{display:none}
+.modo{display:flex;gap:8px;margin-bottom:14px;flex-wrap:wrap}
+.modo button{font:800 15px 'Figtree',sans-serif;padding:10px 16px;border-radius:30px;border:2px solid #D9E3DC;background:#fff;color:var(--tinta);cursor:pointer;min-height:44px}
+.modo button.on{background:var(--verde);border-color:var(--verde);color:#fff}
+.res ul.lista-n{list-style:none;padding:0;margin:10px 0 12px;display:grid;gap:8px}
+.res ul.lista-n li{background:#fff;border-radius:10px;padding:10px 14px;font-weight:700;display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}
 .buscador .btn[disabled]{opacity:.7;cursor:progress}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
 .res{margin-top:18px;border-radius:12px;padding:20px 22px;animation:entrar .35s ease}
@@ -420,8 +426,19 @@ footer img{height:36px;width:auto}
     <div class="buscador rev">
       <div class="cabecera" style="margin-bottom:18px">
         <span class="cinta verde giro-1">¿Estás en el padrón?</span>
-        <p>Poné tu número de documento y fijate si podés votar el 19. Tus datos no salen de tu celular.</p>
+        <p>Buscate con tu documento o con tu apellido y nombre, y fijate si podés votar el 19. Tus datos no salen de tu celular.</p>
       </div>
+      <div class="modo" role="group" aria-label="Buscar por">
+        <button type="button" class="on" data-m="dni" aria-pressed="true">Por DNI</button>
+        <button type="button" data-m="nombre" aria-pressed="false">Por apellido y nombre</button>
+      </div>
+      <form id="formNombre" autocomplete="off" hidden>
+        <label for="pAp" class="sr">Apellido</label>
+        <input id="pAp" placeholder="Apellido" maxlength="40" autocapitalize="words">
+        <label for="pNom" class="sr">Nombre</label>
+        <input id="pNom" placeholder="Nombre" maxlength="40" autocapitalize="words">
+        <button class="btn btn-rojo" id="btnBuscarN" type="submit">Buscar</button>
+      </form>
       <form id="formPadron" autocomplete="off">
         <label for="dni" class="sr">Número de documento</label>
         <input id="dni" inputmode="numeric" pattern="[0-9.\s]*" placeholder="Ej: 45123456" maxlength="12" required>
@@ -673,6 +690,63 @@ const ICONO_WA = '<svg viewBox="0 0 24 24" width="20" height="20" fill="currentC
 const puntos = d => d.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
 function mostrar(clase, html){ res.className = 'res ' + clase; res.innerHTML = html; res.hidden = false; }
 inDni.addEventListener('focus', () => cargarPadron().catch(() => {}), { once:true });
+
+// Búsqueda por apellido y nombre: índice cifrado aparte (padron-nombres.js), sin DNI.
+// Cada clave es "apellido|nombre" normalizado; sin un apellido y un nombre reales no se puede leer nada.
+const fNom = document.getElementById('formNombre'), fDni = document.getElementById('formPadron');
+document.querySelectorAll('.modo button').forEach(b => b.addEventListener('click', () => {
+  document.querySelectorAll('.modo button').forEach(x => { x.classList.toggle('on', x === b); x.setAttribute('aria-pressed', x === b); });
+  const n = b.dataset.m === 'nombre'; fNom.hidden = !n; fDni.hidden = n; res.hidden = true;
+  (n ? document.getElementById('pAp') : inDni).focus();
+  if (n) cargarNombres().catch(() => {});
+}));
+let nombresP = null;
+const cargarNombres = () => nombresP || (nombresP = new Promise((ok, ko) => {
+  const s = document.createElement('script'); s.src = 'padron-nombres.js?v=1';
+  s.onload = () => ok(window.PADRON_N); s.onerror = () => { nombresP = null; ko(); }; document.head.appendChild(s);
+}));
+const NO_CUENTA = new Set(['de','del','la','las','los','y','da','di','do','dos','van','von','e']);
+const palabras = t => (t || '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '')
+  .split(/[^a-z]+/).filter(w => w.length > 1 && !NO_CUENTA.has(w));
+const SN = new TextEncoder().encode('sumar-lista10-aee-2026|nombre');
+const hex = b => [...new Uint8Array(b)].map(x => x.toString(16).padStart(2, '0')).join('');
+async function buscarClave(P, clave){
+  const base = await crypto.subtle.importKey('raw', new TextEncoder().encode(clave), 'PBKDF2', false, ['deriveBits']);
+  const dk = new Uint8Array(await crypto.subtle.deriveBits({ name:'PBKDF2', hash:'SHA-256', salt:SN, iterations:P.it }, base, 256));
+  const marca = new Uint8Array(dk.length + 3); marca.set(dk); marca.set(new TextEncoder().encode('|id'), dk.length);
+  const blob = P.d[hex(await crypto.subtle.digest('SHA-256', marca)).slice(0, 24)]; if (!blob) return [];
+  const raw = Uint8Array.from(atob(blob), c => c.charCodeAt(0));
+  const key = await crypto.subtle.importKey('raw', dk, 'AES-GCM', false, ['decrypt']);
+  return JSON.parse(new TextDecoder().decode(await crypto.subtle.decrypt({ name:'AES-GCM', iv:raw.slice(0, 12) }, key, raw.slice(12))));
+}
+const esc = t => String(t).replace(/[&<>"]/g, c => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;' }[c]));
+const btnN = document.getElementById('btnBuscarN');
+fNom.addEventListener('submit', async ev => {
+  ev.preventDefault();
+  const apT = document.getElementById('pAp').value.trim(), noT = document.getElementById('pNom').value.trim();
+  const A = palabras(apT).slice(0, 2), N = palabras(noT).slice(0, 2);
+  if (!A.length || !N.length) { mostrar('no', '<h3>Completá los dos campos</h3><p>Escribí tu apellido y tu nombre (por ejemplo: Gómez · María).</p>'); return; }
+  btnN.disabled = true; btnN.textContent = 'Buscando…';
+  try {
+    const P = await cargarNombres(), cuenta = new Map();
+    for (const a of A) for (const n of N) for (const r of await buscarClave(P, a + '|' + n)) {
+      const k = r.o; cuenta.set(k, { r, c: (cuenta.get(k)?.c || 0) + 1 });
+    }
+    const max = Math.max(0, ...[...cuenta.values()].map(x => x.c));
+    const hall = [...cuenta.values()].filter(x => x.c === max).map(x => x.r).sort((x, y) => x.o - y.o);
+    if (hall.length) mostrar('si', `<h3>${hall.length === 1 ? '¡Sí, estás en el padrón!' : `Encontramos ${hall.length} personas con ese nombre`}</h3>
+      <ul class="lista-n">${hall.slice(0, 8).map(r => `<li><span>${esc(r.a)}, ${esc(r.n)}</span><span>Nº de orden <b>${r.o}</b></span></li>`).join('')}</ul>
+      ${hall.length > 8 ? '<p>Son muchos: escribí tu apellido y tu nombre completos, o buscate por DNI.</p>' : ''}
+      <p>El jueves 19, de 8 a 20 h, andá a la Escuela de Enfermería con tu DNI y votá <b>Lista 10</b>. 💚</p>
+      <div class="acciones"><a class="btn btn-verde" href="${CAL}" target="_blank" rel="noopener">Agendar el 19</a></div>`);
+    else mostrar('no', `<h3>No encontramos a ${esc(apT)}, ${esc(noT)}</h3>
+      <p>Revisá cómo está escrito (sin apodos) o probá con tu DNI. Si igual no aparecés, escribinos y te ayudamos con el reclamo.</p>
+      <a class="btn btn-verde wa" href="https://wa.me/${WA}?text=${encodeURIComponent('Hola! Busqué mi nombre en el padrón de las elecciones AEE 2026 y no figuro. ¿Me ayudan con el reclamo?')}" target="_blank" rel="noopener">${ICONO_WA}Escribinos por WhatsApp</a>`);
+  } catch (e) {
+    if (!window.crypto || !crypto.subtle) mostrar('no', '<h3>Tu navegador no puede buscar</h3><p>Abrí este link en Chrome o Safari (no dentro de otra app) y probá de nuevo.</p>');
+    else mostrar('no', '<h3>No pudimos buscar</h3><p>Revisá tu conexión a internet y probá de nuevo.</p>');
+  } finally { btnN.disabled = false; btnN.textContent = 'Buscar'; }
+});
 document.getElementById('formPadron').addEventListener('submit', async ev => {
   ev.preventDefault();
   const doc = inDni.value.replace(/\D/g, '').replace(/^0+/, '');
