@@ -170,7 +170,7 @@ footer a{color:var(--verde);font-weight:800}
 // ===== Conteo en vivo =====
 // FUENTE: link "Publicar en la web" (formato CSV) de la planilla del conteo. Columnas: Hora | Mesa 1 | Mesa 2 | Mesa 3
 // Cada fila es un corte: la hora y cuántos votaron hasta ese momento en cada mesa (acumulado). Celda vacía = sigue igual.
-const FUENTE = '';
+const FUENTE = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vR1EFmr1iDyHBKTWkIFi6so0stU_HjTWqOUjtv6ZLSfuqqFVqY14nJc7ElJVgM6MCgGagMBHXiNDdgI/pub?output=csv';
 const CADA = 60000;                 // se vuelve a leer cada 1 minuto
 const ABRE = 8, CIERRA = 20;        // horario de votación (hora de Argentina)
 const DEMO = new URLSearchParams(location.search).has('demo');
@@ -237,7 +237,7 @@ async function leer(){
   } catch (e) { document.getElementById('act').textContent = 'No pudimos actualizar. Probamos de nuevo en un minuto.'; }
 }
 leer(); setInterval(leer, CADA);
-if (!FUENTE && !DEMO) document.getElementById('horas').innerHTML = Array.from({ length: CIERRA - ABRE }, (_, i) => `<div><em></em><i style="height:0"></i><small>${ABRE + i}</small></div>`).join('');
+if (!DEMO) document.getElementById('horas').innerHTML = Array.from({ length: CIERRA - ABRE }, (_, i) => `<div><em></em><i style="height:0"></i><small>${ABRE + i}</small></div>`).join('');
 
 // ===== Mensaje para el curso =====
 const LINK = 'https://sumarenfermeria-rgb.github.io/lista10/hoy.html';
