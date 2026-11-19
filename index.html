@@ -70,6 +70,7 @@ a{color:inherit}
 .nav ul a:hover{background:var(--crema);color:var(--texto)}
 .envivo i,.vivo-bar i{display:inline-block;width:9px;height:9px;border-radius:50%;background:var(--rojo);margin-right:7px;vertical-align:1px;animation:vivoLate 1.6s infinite}
 .nav ul a{white-space:nowrap}
+.mesas-letras{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:12px}.mesas-letras div{background:var(--verde);color:#fff;border-radius:12px;padding:10px 8px;text-align:center}.mesas-letras b{display:block;font-family:Archivo,sans-serif;font-weight:900;font-size:20px;text-transform:uppercase}.mesas-letras span{font-weight:800;font-size:19px;white-space:nowrap;color:#FFF1B8}
 .nav ul a.envivo{color:var(--rojo)}
 .barra a.envivo{display:flex;align-items:center;justify-content:center}
 .barra a.envivo i{background:#fff}
@@ -475,7 +476,7 @@ footer img{height:36px;width:auto}
     </div>
     <div class="pasos">
       <div class="paso rev"><h4>Cuándo</h4><p><span class="dato">Jueves 19 de noviembre</span><br>De <span class="dato">8 a 20 h</span><br><a class="mapa" href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=Votar+Lista+10+%C2%B7+Sumar+Enfermer%C3%ADa&amp;dates=20261119T110000Z/20261119T230000Z&amp;details=Elecciones+de+la+Asociaci%C3%B3n+de+Estudiantes+de+Enfermer%C3%ADa.+Llev%C3%A1+tu+DNI+y+vot%C3%A1+Lista+10.&amp;location=Escuela+de+Enfermer%C3%ADa+UNaM%2C+L%C3%B3pez+Torres+y+Mariano+Moreno%2C+Posadas" target="_blank" rel="noopener">Agendarlo en el calendario →</a></p></div>
-      <div class="paso rev"><h4>Dónde</h4><p>Escuela de Enfermería, UNaM.<br><span class="dato">López Torres y Mariano Moreno</span><br><a class="mapa" href="https://www.google.com/maps/search/?api=1&amp;query=Escuela+de+Enfermer%C3%ADa+UNaM+L%C3%B3pez+Torres+y+Mariano+Moreno+Posadas" target="_blank" rel="noopener">Ver en el mapa →</a></p></div>
+      <div class="paso rev"><h4>Dónde</h4><p>Escuela de Enfermería, UNaM.<br><span class="dato">López Torres y Mariano Moreno</span><br><a class="mapa" href="https://www.google.com/maps/search/?api=1&amp;query=Escuela+de+Enfermer%C3%ADa+UNaM+L%C3%B3pez+Torres+y+Mariano+Moreno+Posadas" target="_blank" rel="noopener">Ver en el mapa →</a><br>Mesa según tu apellido: <span class="dato">A–F: 1</span> <span class="dato">G–M: 2</span> <span class="dato">N–Z: 3</span></p></div>
       <div class="paso rev"><h4>Antes de ir</h4><p>Asegurate de estar en el padrón y asistí con tu <span class="dato">DNI</span>.<br><a class="mapa" href="#padron">Buscarme en el padrón →</a></p></div>
       <div class="paso rev"><h4>A quién</h4><p>Buscá la boleta <span class="dato">Lista 10</span>: en la boleta figuramos como <span class="dato">Identidad Estudiantil</span>.</p></div>
     </div>
@@ -678,8 +679,10 @@ const io = 'IntersectionObserver' in window ? new IntersectionObserver(es => es.
 document.querySelectorAll('.rev').forEach(el => io ? io.observe(el) : el.classList.add('ver'));
 
 // Mensaje para avisarle a un compañero que está en el padrón
+// Mesa según el apellido (el padrón está en orden alfabético): A–F mesa 1, G–M mesa 2, N–Z mesa 3
+const mesaDe = o => o <= 3094 ? 1 : o <= 5090 ? 2 : 3;
 const avisoWa = p => 'https://wa.me/?text=' + encodeURIComponent(`¡Hola ${p[2].split(' ')[0]}! 👋 Hoy votamos en las elecciones de la Asociación de Estudiantes de Enfermería 🗳️
-Me fijé y estás en el padrón (Nº de orden ${p[0]}).
+Me fijé y estás en el padrón: votás en la MESA ${mesaDe(p[0])} (Nº de orden ${p[0]}).
 🕗 Hasta las 20 h · 📍 Escuela de Enfermería · 🪪 Llevá tu DNI
 👉 https://sumarenfermeria-rgb.github.io/lista10/hoy.html`);
 // Padrón: cada registro está cifrado con el propio documento (PBKDF2 + AES-GCM).
@@ -779,7 +782,7 @@ fNom.addEventListener('submit', async ev => {
     const exactos = hall.filter(h => h[0] < .5).length, MAX = 12;
     if (hall.length) mostrar('si', `<h3>${hall.length === 1 ? '¡Encontramos a una persona!' : `Encontramos ${hall.length} personas`}</h3>
       ${exactos < hall.length ? '<p>Te mostramos también apellidos parecidos, por si está escrito distinto.</p>' : ''}
-      <ul class="lista-n">${hall.slice(0, MAX).map(([, p]) => `<li><span>${esc(p[1])}, ${esc(p[2])}<br><span class="o">Nº de orden ${p[0]}</span></span><a class="btn btn-wa" target="_blank" rel="noopener" href="${avisoWa(p)}">Avisale</a></li>`).join('')}</ul>
+      <ul class="lista-n">${hall.slice(0, MAX).map(([, p]) => `<li><span>${esc(p[1])}, ${esc(p[2])}<br><span class="o"><b style="color:var(--rojo)">Mesa ${mesaDe(p[0])}</b> · Nº de orden ${p[0]}</span></span><a class="btn btn-wa" target="_blank" rel="noopener" href="${avisoWa(p)}">Avisale</a></li>`).join('')}</ul>
       ${hall.length > MAX ? `<p style="margin-bottom:10px">Hay ${hall.length - MAX} más: escribí más letras del nombre para achicar la lista.</p>` : ''}
       <p>El jueves 19, de 8 a 20 h, en la Escuela de Enfermería, con el DNI. Votá <b>Lista 10</b>. 💚</p>
       <div class="acciones"><a class="btn btn-verde" href="${CAL}" target="_blank" rel="noopener">Agendar el 19</a></div>`);
@@ -798,7 +801,7 @@ document.getElementById('formPadron').addEventListener('submit', async ev => {
   try {
     const r = await buscarDoc(doc);
     if (r) mostrar('si', `<h3>¡Sí, estás en el padrón!</h3>
-      <div class="pills">${r.map(x => `<span>${x.t} <b>${puntos(doc)}</b></span><span>Nº de orden <b>${x.o}</b></span>`).join('')}</div>
+      <div class="pills">${r.map(x => `<span>${x.t} <b>${puntos(doc)}</b></span><span>Nº de orden <b>${x.o}</b></span><span>Votás en la <b>Mesa ${mesaDe(x.o)}</b></span>`).join('')}</div>
       <p>El jueves 19, de 8 a 20 h, andá a la Escuela de Enfermería con tu DNI y votá <b>Lista 10</b>. 💚</p>
       <div class="acciones"><a class="btn btn-verde" href="${CAL}" target="_blank" rel="noopener">Agendar el 19</a><a class="btn btn-rojo wa" href="https://wa.me/?text=${encodeURIComponent('Ya me fijé y estoy en el padrón para votar el 19 💚 Fijate vos acá: ' + URL_SITIO + '#padron')}" target="_blank" rel="noopener">${ICONO_WA}Avisale a tu curso</a></div>`);
     else mostrar('no', `<h3>No encontramos el ${puntos(doc)}</h3>

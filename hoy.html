@@ -60,6 +60,7 @@ h2 .r{color:var(--rojo)}
 .info div{background:var(--papel);border-radius:12px;padding:12px}
 .info b{display:block;font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:var(--rojo)}
 .info span{font-weight:800;font-size:15.5px;line-height:1.25;display:block;margin-top:2px}
+.mesas-letras{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:12px}.mesas-letras div{background:var(--verde);color:#fff;border-radius:12px;padding:10px 8px;text-align:center}.mesas-letras b{display:block;font-family:Archivo,sans-serif;font-weight:900;font-size:20px;text-transform:uppercase}.mesas-letras span{font-weight:800;font-size:19px;white-space:nowrap;color:#FFF1B8}
 .boleta{display:grid;grid-template-columns:120px 1fr;gap:16px;align-items:center;margin-top:16px;background:var(--crema);border-radius:12px;padding:14px}
 .boleta img{border-radius:4px;box-shadow:0 8px 18px -10px rgba(0,0,0,.5)}
 .boleta p{margin:0;font-weight:700}
@@ -115,9 +116,9 @@ footer a{color:var(--verde);font-weight:800}
     <div class="u">estudiantes ya votaron</div>
     <div class="act" id="act">El conteo arranca cuando abren las mesas, a las 8.</div>
     <div class="mesas" id="mesas">
-      <div class="mesa"><b id="m1">—</b><span>Mesa 1</span></div>
-      <div class="mesa"><b id="m2">—</b><span>Mesa 2</span></div>
-      <div class="mesa"><b id="m3">—</b><span>Mesa 3</span></div>
+      <div class="mesa"><b id="m1">—</b><span>Mesa 1 · A–F</span></div>
+      <div class="mesa"><b id="m2">—</b><span>Mesa 2 · G–M</span></div>
+      <div class="mesa"><b id="m3">—</b><span>Mesa 3 · N–Z</span></div>
     </div>
     <div class="horas" id="horas" aria-label="Votantes por hora"></div>
     <p class="nota">Lo cargan los fiscales de mesa. Se actualiza solo, sin recargar la página.</p>
@@ -131,6 +132,8 @@ footer a{color:var(--verde);font-weight:800}
       <div><b>Dónde</b><span>Escuela de Enfermería · López Torres y Mariano Moreno</span></div>
       <div><b>Qué llevar</b><span>Tu DNI</span></div>
     </div>
+    <p class="sub" style="margin:16px 0 0;font-weight:800;color:var(--tinta)">¿En qué mesa votás? Depende de tu apellido:</p>
+    <div class="mesas-letras"><div><b>Mesa 1</b><span>A – F</span></div><div><b>Mesa 2</b><span>G – M</span></div><div><b>Mesa 3</b><span>N – Z</span></div></div>
     <div class="boleta">
       <a href="img/boleta-grande.jpg?v=2" target="_blank" rel="noopener"><img src="img/boleta.jpg?v=2" alt="Boleta Lista 10, Identidad Estudiantil" width="400" height="613"></a>
       <p>Si nos acompañás, buscá la boleta <span class="d">Lista 10</span>. En la boleta figuramos como <b>Identidad Estudiantil</b>.</p>
@@ -250,8 +253,10 @@ const armarWa = () => btnMsg.href = 'https://wa.me/?text=' + encodeURIComponent(
 msg.addEventListener('input', armarWa); armarWa();
 
 // Mensaje para avisarle a un compañero que está en el padrón
+// Mesa según el apellido (el padrón está en orden alfabético): A–F mesa 1, G–M mesa 2, N–Z mesa 3
+const mesaDe = o => o <= 3094 ? 1 : o <= 5090 ? 2 : 3;
 const avisoWa = p => 'https://wa.me/?text=' + encodeURIComponent(`¡Hola ${p[2].split(' ')[0]}! 👋 Hoy votamos en las elecciones de la Asociación de Estudiantes de Enfermería 🗳️
-Me fijé y estás en el padrón (Nº de orden ${p[0]}).
+Me fijé y estás en el padrón: votás en la MESA ${mesaDe(p[0])} (Nº de orden ${p[0]}).
 🕗 Hasta las 20 h · 📍 Escuela de Enfermería · 🪪 Llevá tu DNI
 👉 https://sumarenfermeria-rgb.github.io/lista10/hoy.html`);
 // Padrón: cada registro está cifrado con el propio documento (PBKDF2 + AES-GCM).
@@ -351,7 +356,7 @@ fNom.addEventListener('submit', async ev => {
     const exactos = hall.filter(h => h[0] < .5).length, MAX = 12;
     if (hall.length) mostrar('si', `<h3>${hall.length === 1 ? '¡Encontramos a una persona!' : `Encontramos ${hall.length} personas`}</h3>
       ${exactos < hall.length ? '<p>Te mostramos también apellidos parecidos, por si está escrito distinto.</p>' : ''}
-      <ul class="lista-n">${hall.slice(0, MAX).map(([, p]) => `<li><span>${esc(p[1])}, ${esc(p[2])}<br><span class="o">Nº de orden ${p[0]}</span></span><a class="btn btn-wa" target="_blank" rel="noopener" href="${avisoWa(p)}">Avisale</a></li>`).join('')}</ul>
+      <ul class="lista-n">${hall.slice(0, MAX).map(([, p]) => `<li><span>${esc(p[1])}, ${esc(p[2])}<br><span class="o"><b style="color:var(--rojo)">Mesa ${mesaDe(p[0])}</b> · Nº de orden ${p[0]}</span></span><a class="btn btn-wa" target="_blank" rel="noopener" href="${avisoWa(p)}">Avisale</a></li>`).join('')}</ul>
       ${hall.length > MAX ? `<p style="margin-bottom:10px">Hay ${hall.length - MAX} más: escribí más letras del nombre para achicar la lista.</p>` : ''}
       <p>El jueves 19, de 8 a 20 h, en la Escuela de Enfermería, con el DNI. Votá <b>Lista 10</b>. 💚</p>
       <div class="acciones"><a class="btn btn-verde" href="${CAL}" target="_blank" rel="noopener">Agendar el 19</a></div>`);
@@ -361,6 +366,25 @@ fNom.addEventListener('submit', async ev => {
   } catch (e) {
     mostrar('no', '<h3>No pudimos buscar</h3><p>Revisá tu conexión a internet y probá de nuevo.</p>');
   } finally { btnN.disabled = false; btnN.textContent = 'Buscar'; }
+});
+document.getElementById('formPadron').addEventListener('submit', async ev => {
+  ev.preventDefault();
+  const doc = inDni.value.replace(/\D/g, '').replace(/^0+/, '');
+  if (doc.length < 6) { mostrar('no', '<h3>Revisá el número</h3><p>Escribí tu documento completo, solo números (por ejemplo 45123456).</p>'); return; }
+  btnB.disabled = true; btnB.textContent = 'Buscando…';
+  try {
+    const r = await buscarDoc(doc);
+    if (r) mostrar('si', `<h3>¡Sí, estás en el padrón!</h3>
+      <div class="pills">${r.map(x => `<span>${x.t} <b>${puntos(doc)}</b></span><span>Nº de orden <b>${x.o}</b></span><span>Votás en la <b>Mesa ${mesaDe(x.o)}</b></span>`).join('')}</div>
+      <p>El jueves 19, de 8 a 20 h, andá a la Escuela de Enfermería con tu DNI y votá <b>Lista 10</b>. 💚</p>
+      <div class="acciones"><a class="btn btn-verde" href="${CAL}" target="_blank" rel="noopener">Agendar el 19</a><a class="btn btn-rojo wa" href="https://wa.me/?text=${encodeURIComponent('Ya me fijé y estoy en el padrón para votar el 19 💚 Fijate vos acá: ' + URL_SITIO + '#padron')}" target="_blank" rel="noopener">${ICONO_WA}Avisale a tu curso</a></div>`);
+    else mostrar('no', `<h3>No encontramos el ${puntos(doc)}</h3>
+      <p>Revisá que el número esté bien. Si lo está, escribinos y te ayudamos con el reclamo para que te incluyan antes del 19.</p>
+      <a class="btn btn-verde wa" href="https://wa.me/${WA}?text=${encodeURIComponent(`Hola! Busqué mi documento ${puntos(doc)} en el padrón de las elecciones AEE 2026 y no figuro. ¿Me ayudan con el reclamo?`)}" target="_blank" rel="noopener">${ICONO_WA}Escribinos por WhatsApp</a>`);
+  } catch (e) {
+    if (!window.crypto || !crypto.subtle) mostrar('no', '<h3>Tu navegador no puede buscar</h3><p>Abrí este link en Chrome o Safari (no dentro de otra app) y probá de nuevo.</p>');
+    else mostrar('no', '<h3>No pudimos buscar</h3><p>Revisá tu conexión a internet y probá de nuevo.</p>');
+  } finally { btnB.disabled = false; btnB.textContent = 'Buscar'; }
 });
 document.getElementById('pAp').addEventListener('focus', () => cargarNombres().catch(() => {}), { once:true });
 </script>
