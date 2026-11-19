@@ -60,6 +60,8 @@ h2 .r{color:var(--rojo)}
 .info div{background:var(--papel);border-radius:12px;padding:12px}
 .info b{display:block;font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:var(--rojo)}
 .info span{font-weight:800;font-size:15.5px;line-height:1.25;display:block;margin-top:2px}
+.mesa-b{display:inline-block;background:var(--rojo);color:#fff;font-family:Archivo,sans-serif;font-weight:900;font-size:19px;text-transform:uppercase;padding:4px 12px 3px;border-radius:8px;margin:6px 8px 2px 0;vertical-align:middle}
+.res .pills span.mesa-p{background:var(--rojo);color:#fff;font-family:Archivo,sans-serif;font-weight:900;font-size:18px;text-transform:uppercase}
 .mesas-letras{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:12px}.mesas-letras div{background:var(--verde);color:#fff;border-radius:12px;padding:10px 8px;text-align:center}.mesas-letras b{display:block;font-family:Archivo,sans-serif;font-weight:900;font-size:20px;text-transform:uppercase}.mesas-letras span{font-weight:800;font-size:19px;white-space:nowrap;color:#FFF1B8}
 .boleta{display:grid;grid-template-columns:120px 1fr;gap:16px;align-items:center;margin-top:16px;background:var(--crema);border-radius:12px;padding:14px}
 .boleta img{border-radius:4px;box-shadow:0 8px 18px -10px rgba(0,0,0,.5)}
@@ -356,7 +358,7 @@ fNom.addEventListener('submit', async ev => {
     const exactos = hall.filter(h => h[0] < .5).length, MAX = 12;
     if (hall.length) mostrar('si', `<h3>${hall.length === 1 ? '¡Encontramos a una persona!' : `Encontramos ${hall.length} personas`}</h3>
       ${exactos < hall.length ? '<p>Te mostramos también apellidos parecidos, por si está escrito distinto.</p>' : ''}
-      <ul class="lista-n">${hall.slice(0, MAX).map(([, p]) => `<li><span>${esc(p[1])}, ${esc(p[2])}<br><span class="o"><b style="color:var(--rojo)">Mesa ${mesaDe(p[0])}</b> · Nº de orden ${p[0]}</span></span><a class="btn btn-wa" target="_blank" rel="noopener" href="${avisoWa(p)}">Avisale</a></li>`).join('')}</ul>
+      <ul class="lista-n">${hall.slice(0, MAX).map(([, p]) => `<li><span>${esc(p[1])}, ${esc(p[2])}<br><span class="mesa-b">Mesa ${mesaDe(p[0])}</span><span class="o">Nº de orden ${p[0]}</span></span><a class="btn btn-wa" target="_blank" rel="noopener" href="${avisoWa(p)}">Avisale</a></li>`).join('')}</ul>
       ${hall.length > MAX ? `<p style="margin-bottom:10px">Hay ${hall.length - MAX} más: escribí más letras del nombre para achicar la lista.</p>` : ''}
       <p>El jueves 19, de 8 a 20 h, en la Escuela de Enfermería, con el DNI. Votá <b>Lista 10</b>. 💚</p>
       <div class="acciones"><a class="btn btn-verde" href="${CAL}" target="_blank" rel="noopener">Agendar el 19</a></div>`);
@@ -375,7 +377,7 @@ document.getElementById('formPadron').addEventListener('submit', async ev => {
   try {
     const r = await buscarDoc(doc);
     if (r) mostrar('si', `<h3>¡Sí, estás en el padrón!</h3>
-      <div class="pills">${r.map(x => `<span>${x.t} <b>${puntos(doc)}</b></span><span>Nº de orden <b>${x.o}</b></span><span>Votás en la <b>Mesa ${mesaDe(x.o)}</b></span>`).join('')}</div>
+      <div class="pills">${r.map(x => `<span class="mesa-p">Mesa ${mesaDe(x.o)}</span><span>${x.t} <b>${puntos(doc)}</b></span><span>Nº de orden <b>${x.o}</b></span>`).join('')}</div>
       <p>El jueves 19, de 8 a 20 h, andá a la Escuela de Enfermería con tu DNI y votá <b>Lista 10</b>. 💚</p>
       <div class="acciones"><a class="btn btn-verde" href="${CAL}" target="_blank" rel="noopener">Agendar el 19</a><a class="btn btn-rojo wa" href="https://wa.me/?text=${encodeURIComponent('Ya me fijé y estoy en el padrón para votar el 19 💚 Fijate vos acá: ' + URL_SITIO + '#padron')}" target="_blank" rel="noopener">${ICONO_WA}Avisale a tu curso</a></div>`);
     else mostrar('no', `<h3>No encontramos el ${puntos(doc)}</h3>
