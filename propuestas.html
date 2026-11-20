@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="es-AR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lo que prometimos · Sumar Enfermería</title>
+<meta name="description" content="Tablero de propuestas de la Asociación de Estudiantes de Enfermería: qué cumplimos, qué estamos gestionando y qué falta.">
+<meta property="og:title" content="Lo que prometimos, a la vista · Sumar Enfermería">
+<meta property="og:description" content="Seguí, propuesta por propuesta, qué cumplimos, qué estamos gestionando y qué falta.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://sumarenfermeria-rgb.github.io/lista10/propuestas.html">
+<meta name="theme-color" content="#1E7A4A">
+<link rel="icon" href="img/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@800;900&family=Figtree:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--verde:#1E7A4A;--tinta:#17402B;--rojo:#D2323A;--papel:#F4F2EE;--crema:#EFE8D8;--texto-2:#4A6B58;--menta:#CFEBDB;--amarillo:#E9A21B}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;font-family:'Figtree',system-ui,sans-serif;color:var(--tinta);background:var(--papel);line-height:1.45}
+.wrap{max-width:860px;margin:0 auto;padding:0 16px}
+.top{background:var(--verde);color:#fff;padding:14px 0}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.top img{height:40px;width:auto}
+.top a{color:#fff;font-weight:800;font-size:14px;text-decoration:none;border:2px solid rgba(255,255,255,.5);border-radius:999px;padding:7px 14px;white-space:nowrap}
+.hero{background:var(--verde);color:#fff;padding:8px 0 74px;position:relative;overflow:hidden}
+.hero::after{content:'+';position:absolute;right:-60px;top:-60px;font:900 380px/1 'Archivo';color:rgba(255,255,255,.06)}
+.hero .et{display:inline-block;background:var(--rojo);font:800 14px 'Archivo';text-transform:uppercase;letter-spacing:.06em;padding:6px 14px;border-radius:999px;transform:rotate(-2deg);position:relative;z-index:1}
+h1{font:900 clamp(38px,10vw,64px)/.95 'Archivo';text-transform:uppercase;margin:14px 0 12px;position:relative;z-index:1}
+.hero p{margin:0;font-size:18px;font-weight:600;color:#E8F6EE;max-width:560px;position:relative;z-index:1}
+.card{background:#fff;border-radius:16px;padding:22px;box-shadow:0 18px 40px -26px rgba(23,64,43,.45);margin-bottom:18px}
+.resumen{margin-top:-52px;position:relative;z-index:2}
+.resumen .big{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.resumen .big b{font:900 clamp(56px,16vw,88px)/1 'Archivo';color:var(--verde);font-variant-numeric:tabular-nums}
+.resumen .big span{font:800 20px 'Archivo';text-transform:uppercase}
+.barra{display:flex;height:16px;border-radius:999px;overflow:hidden;background:#E6ECE8;margin:14px 0 12px}
+.barra i{display:block;height:100%;transition:width .8s}
+.leyenda{display:flex;flex-wrap:wrap;gap:8px}
+.filtro{font:800 14px 'Figtree',sans-serif;display:inline-flex;align-items:center;gap:8px;padding:9px 14px;border-radius:999px;border:2px solid #D9E3DC;background:#fff;color:var(--tinta);cursor:pointer;min-height:44px}
+.filtro.on{border-color:var(--tinta);background:var(--tinta);color:#fff}
+.dot{width:12px;height:12px;border-radius:50%;flex:none}
+.d-cumplida{background:var(--verde)}.d-curso{background:var(--amarillo)}.d-pendiente{background:#B9C4BD}
+.act{font-size:13px;color:var(--texto-2);margin:12px 0 0}
+h2{font:900 24px/1.05 'Archivo';text-transform:uppercase;margin:30px 0 4px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+h2 .n{font-size:13px;background:var(--rojo);color:#fff;padding:4px 10px;border-radius:8px;letter-spacing:.04em}
+.eje-sub{margin:0 0 14px;color:var(--texto-2);font-weight:600}
+.grilla{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.prop{background:#fff;border-radius:14px;padding:16px 16px 14px;box-shadow:0 12px 30px -24px rgba(23,64,43,.5);border-left:6px solid #B9C4BD;display:flex;flex-direction:column;gap:8px}
+.prop.cumplida{border-left-color:var(--verde)}.prop.curso{border-left-color:var(--amarillo)}
+.prop h3{margin:0;font:800 18px/1.2 'Figtree',sans-serif}
+.prop p{margin:0;font-size:15px;color:var(--texto-2)}
+.est{align-self:flex-start;display:inline-flex;align-items:center;gap:6px;font:800 12.5px 'Figtree',sans-serif;text-transform:uppercase;letter-spacing:.05em;padding:5px 10px;border-radius:999px;background:#EEF1EF;color:#55655B}
+.prop.cumplida .est{background:#DDF2E5;color:var(--verde)}
+.prop.curso .est{background:#FBEBC8;color:#8A5A00}
+.avance{background:var(--papel);border-radius:10px;padding:9px 11px;font-size:14.5px;font-weight:600;color:var(--tinta)}
+.avance small{display:block;font-size:12px;font-weight:800;color:var(--texto-2);text-transform:uppercase;letter-spacing:.05em}
+.vacio{grid-column:1/-1;color:var(--texto-2);font-weight:600}
+.cta{background:var(--rojo);color:#fff;text-align:center;margin-top:30px}
+.cta h2{justify-content:center;margin-top:0}
+.cta p{margin:0 0 16px;font-weight:600}
+.btn{display:inline-flex;align-items:center;justify-content:center;padding:14px 22px;border-radius:999px;font:800 15px 'Archivo';text-transform:uppercase;text-decoration:none;min-height:52px;background:#fff;color:var(--rojo)}
+footer{text-align:center;padding:10px 16px 40px;font-size:14px;color:var(--texto-2)}
+footer a{color:var(--verde);font-weight:800}
+.ocu{display:none}
+@media (max-width:620px){.grilla{grid-template-columns:1fr}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<header class="top"><div class="wrap"><img src="img/logo-blanco.webp" alt="Sumar Enfermería" width="240" height="171"><a href="index.html#buzon">Dejá tu idea</a></div></header>
+<section class="hero"><div class="wrap">
+  <span class="et">Asociación de Estudiantes de Enfermería</span>
+  <h1>Lo que<br>prometimos,<br>a la vista</h1>
+  <p>Propuesta por propuesta: qué ya cumplimos, qué estamos gestionando y qué falta.</p>
+</div></section>
+
+<main class="wrap">
+  <div class="card resumen">
+    <div class="big"><b id="nCumplidas">0</b><span id="txtCumplidas">de 20 propuestas cumplidas</span></div>
+    <div class="barra" id="barra" aria-hidden="true"></div>
+    <div class="leyenda" id="filtros" role="group" aria-label="Filtrar por estado"></div>
+    <p class="act" id="act"></p>
+  </div>
+  <div id="ejes"></div>
+
+  <div class="card cta">
+    <h2>¿Algo que mejorar?</h2>
+    <p>Dejanos tu idea o reclamo en el buzón anónimo. Lo leemos todo.</p>
+    <a class="btn" href="index.html#buzon">Ir al buzón</a>
+  </div>
+</main>
+<footer>Sumar Enfermería · Asociación de Estudiantes de Enfermería · UNaM · <a href="./">Inicio</a></footer>
+
+<script>
+/* ====== DATOS: editá acá ======
+   estado: 'cumplida' | 'curso' | 'pendiente'
+   avance: qué se hizo o en qué está (opcional) · fecha: dd/mm (opcional) */
+const ACTUALIZADO = '20/11/2026';
+const EJES = [
+  { nombre:'Formación y acompañamiento', items:[
+    { t:'Capacitación continua', d:'Talleres teórico-prácticos con certificación: farmacología, heridas, RCP, politrauma y más.', estado:'pendiente' },
+    { t:'Charlas con graduados', d:'Enfermeros graduados comparten su experiencia en el ámbito laboral.', estado:'pendiente' },
+    { t:'Herramientas para el futuro laboral', d:'Salida laboral, residencias, especializaciones, currículum.', estado:'pendiente' },
+    { t:'Tutorías y clases de apoyo', d:'Estudiantes con más experiencia y docentes acompañan a sus compañeros.', estado:'pendiente' },
+    { t:'Banco de apuntes actualizado', d:'Apuntes, resúmenes, bibliografías y programas en un espacio organizado.', estado:'pendiente' } ]},
+  { nombre:'Finales y prácticas', items:[
+    { t:'Clases de consulta pre-final', d:'Poder pedir clases de consulta antes de cada final.', estado:'pendiente' },
+    { t:'Acceso al aula virtual', d:'Material y bibliografía de cada materia para preparar finales.', estado:'pendiente' },
+    { t:'Pasantías y colaboraciones', d:'Fomentar pasantías y colaboraciones entre instituciones.', estado:'pendiente' },
+    { t:'Uniformes y materiales accesibles', d:'Proveedores con mejores precios y ropero solidario.', estado:'pendiente' },
+    { t:'Canal de reclamos', d:'Un lugar para dejar inquietudes y reclamos sin exponerte.', estado:'pendiente' } ]},
+  { nombre:'Bienestar', items:[
+    { t:'Espacio de salud mental', d:'Reactivar con la Facultad la interconsulta psicológica.', estado:'pendiente' },
+    { t:'Deporte y recreación', d:'Espacios y torneos que integren a todos los años.', estado:'pendiente' },
+    { t:'Espacios comunes y descanso', d:'Lugares cómodos con wifi, enchufes y espacio para reunirse.', estado:'pendiente' },
+    { t:'Agua caliente y conectividad', d:'Agua caliente para el mate y dispenser de agua fría para el tereré.', estado:'curso', avance:'Agua caliente: instalación prevista para esta semana.' },
+    { t:'Estacionamiento para motos', d:'Un espacio seguro, ordenado y accesible.', estado:'pendiente' } ]},
+  { nombre:'Comunidad', items:[
+    { t:'Buzón de propuestas', d:'Formulario online con QR y buzón físico para que cada idea llegue.', estado:'curso', avance:'Formulario online funcionando: más de 100 mensajes recibidos. Falta el buzón físico.' },
+    { t:'Rendición de cuentas', d:'Informes periódicos sobre lo que hicimos, lo que falta y los fondos.', estado:'curso', avance:'Este tablero es el primer paso.', fecha:'20/11' },
+    { t:'Delegados por año', d:'Una voz activa de cada curso en las decisiones.', estado:'pendiente' },
+    { t:'Bienvenida a ingresantes', d:'Jornadas de recepción y sistema de padrinos.', estado:'pendiente' },
+    { t:'Becas, fotocopias y apoyo integral', d:'Gestión de becas, fotocopias a bajo costo y flexibilidad para cursar.', estado:'pendiente' } ]}
+];
+/* ============================== */
+
+const ESTADOS = { cumplida:['Cumplida','✓'], curso:['En gestión','…'], pendiente:['Pendiente','○'] };
+const todas = EJES.flatMap(e => e.items);
+const cuenta = k => todas.filter(p => p.estado === k).length;
+const nC = cuenta('cumplida'), nG = cuenta('curso');
+document.getElementById('nCumplidas').textContent = nC + nG;
+document.getElementById('txtCumplidas').textContent = `de ${todas.length} propuestas en marcha`;
+document.getElementById('act').textContent = `Actualizado el ${ACTUALIZADO}.`;
+document.getElementById('barra').innerHTML = ['cumplida','curso','pendiente']
+  .map(k => `<i class="d-${k}" style="width:${cuenta(k)/todas.length*100}%"></i>`).join('');
+
+const filtros = document.getElementById('filtros');
+let filtro = 'todas';
+const opciones = [['todas', `Todas (${todas.length})`], ...Object.keys(ESTADOS).map(k => [k, `${ESTADOS[k][0]} (${cuenta(k)})`])];
+filtros.innerHTML = opciones.map(([k, txt]) =>
+  `<button class="filtro ${k==='todas'?'on':''}" data-f="${k}" aria-pressed="${k==='todas'}">${k!=='todas'?`<span class="dot d-${k}"></span>`:''}${txt}</button>`).join('');
+filtros.addEventListener('click', ev => {
+  const b = ev.target.closest('.filtro'); if (!b) return;
+  filtro = b.dataset.f;
+  filtros.querySelectorAll('.filtro').forEach(x => { const on = x === b; x.classList.toggle('on', on); x.setAttribute('aria-pressed', on); });
+  pintar();
+});
+
+function pintar(){
+  document.getElementById('ejes').innerHTML = EJES.map((e, i) => {
+    const vis = e.items.filter(p => filtro === 'todas' || p.estado === filtro);
+    const hechas = e.items.filter(p => p.estado === 'cumplida').length;
+    if (!vis.length) return '';
+    return `<section><h2>${e.nombre} <span class="n">Eje ${i+1} · ${hechas}/${e.items.length}</span></h2>
+      <div class="grilla">${vis.length ? vis.map(p => `<article class="prop ${p.estado}">
+        <span class="est"><span class="dot d-${p.estado}"></span>${ESTADOS[p.estado][0]}${p.fecha ? ' · ' + p.fecha : ''}</span>
+        <h3>${p.t}</h3><p>${p.d}</p>
+        ${p.avance ? `<div class="avance"><small>Avance</small>${p.avance}</div>` : ''}
+      </article>`).join('') : '<p class="vacio">Ninguna en este estado por ahora.</p>'}</div></section>`;
+  }).join('') || '<p class="vacio">Ninguna propuesta en este estado por ahora.</p>';
+}
+pintar();
+</script>
+</body>
+</html>
