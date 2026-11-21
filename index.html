@@ -346,6 +346,17 @@ footer img{height:36px;width:auto}
 .card .ir{margin-top:auto;padding-top:6px;font-weight:800;color:var(--verde);text-decoration:none}
 .card .ir:hover{text-decoration:underline}
 .hero .elegi{max-width:560px}
+.accesos{display:grid;grid-template-columns:1fr;gap:18px;align-items:start}
+@media (min-width:900px){.accesos{grid-template-columns:repeat(3,1fr)}}
+.accesos .card{gap:4px}
+.accesos .bajada{margin:0 0 8px}
+.accesos ul{list-style:none;margin:0;padding:0;display:grid}
+.accesos li+li{border-top:1px solid #E3EAE5}
+.accesos li a{display:block;padding:12px 0;text-decoration:none;min-height:44px}
+.accesos li b{display:block;font-family:'Archivo';font-weight:800;font-size:17px;color:var(--verde)}
+.accesos li b::after{content:" ↗";font-size:.85em}
+.accesos li span{display:block;font-size:14.5px;color:var(--texto-2);line-height:1.35}
+.accesos li a:hover b{text-decoration:underline}
 .vacio-act{grid-column:1/-1;margin:0;color:var(--texto-2);font-weight:600}
 </style>
 </head>
@@ -363,6 +374,7 @@ footer img{height:36px;width:auto}
       <li><a href="#quienes">Quiénes somos</a></li>
       <li><a href="#actividades">Actividades</a></li>
       <li><a href="#herramientas">Herramientas</a></li>
+      <li><a href="#accesos">Accesos</a></li>
       <li><a href="#propuestas">Propuestas</a></li>
       <li><a href="#candidatos">Equipo</a></li>
       <li><a class="cta" href="#buzon">Buzón</a></li>
@@ -440,6 +452,16 @@ footer img{height:36px;width:auto}
       <p>Todo lo que podés usar desde el celular.</p>
     </div>
     <div class="grilla" id="listaHerr"></div>
+  </div>
+</section>
+
+<section id="accesos">
+  <div class="wrap">
+    <div class="cabecera rev">
+      <span class="cinta rojo giro-3">Accesos rápidos</span>
+      <p>Tocá y entrás directo. Se abre en una pestaña nueva.</p>
+    </div>
+    <div class="accesos" id="listaAccesos"></div>
   </div>
 </section>
 
@@ -573,7 +595,7 @@ const HERRAMIENTAS = [
   ['Buzón de propuestas','Dejanos una propuesta, necesidad o inquietud. Es anónimo.','Escribir al buzón','#buzon'],
   ['Certificados','Buscá con tu DNI el certificado de los talleres a los que fuiste.','Taller de Heridas','https://sumarenfermeria-rgb.github.io/certificados-heridas/'],
   ['Instagram','Fechas, avisos y todo lo que organizamos.','@sumarenfermeria','https://www.instagram.com/sumarenfermeria/'],
-  ['WhatsApp','¿Tenés una duda o necesitás una mano? Escribinos.','Escribinos','https://wa.me/5493765124340']
+  ['WhatsApp','¿Tenés una duda o necesitás una mano? Escribinos.','Escribinos','https://wa.me/5493765080524']
 ];
 /* ============================== */
 
@@ -606,6 +628,38 @@ botones.forEach((b, i) => {
     if (d) { const n = botones[(i + d + botones.length) % botones.length]; activar(n); n.focus(); }
   });
 });
+
+/* Accesos rápidos: cada link va en la tarjeta de su categoría */
+const CATEGORIAS = [
+  ['Cursada','Lo que usás todas las semanas.'],
+  ['Trámites y beneficios','Ingreso, becas, boleto y egreso.'],
+  ['Comunidad Sumar','Apuntes, grupos y contactos útiles.']
+];
+const ACCESOS = [
+  {"categoria":"Cursada","titulo":"SIU Guaraní","descripcion":"Inscripción a materias y exámenes, notas e historia académica","url":"https://autogestion.sistemas.unam.edu.ar/"},
+  {"categoria":"Cursada","titulo":"Aula Virtual","descripcion":"Campus de la Escuela: materiales, clases y entregas de cada cátedra","url":"https://aulavirtual.escenf.unam.edu.ar/"},
+  {"categoria":"Cursada","titulo":"Horarios","descripcion":"Horarios de cursada por año y comisión","url":"https://sites.google.com/view/sumar-enfermeria-telefonos/horarios"},
+  {"categoria":"Cursada","titulo":"Correlativas","descripcion":"Qué materias necesitás tener aprobadas o regularizadas para cursar cada una","url":"https://sites.google.com/view/sumar-enfermeria-telefonos/correlativas"},
+  {"categoria":"Cursada","titulo":"Plan de estudio","descripcion":"Plan de estudio 2016 de la carrera","url":"https://sites.google.com/view/sumar-enfermeria-telefonos/plan-de-estudio-2016"},
+  {"categoria":"Cursada","titulo":"Asimilación","descripcion":"Plan de transición 2004–2017: cómo se pasan las materias del plan viejo al nuevo","url":"https://sites.google.com/view/sumar-enfermeria-telefonos/plan-de-de-transici%C3%B3n-2004-2017"},
+  {"categoria":"Trámites y beneficios","titulo":"Web de la Escuela","descripcion":"Sitio oficial de la Escuela de Enfermería (UNaM)","url":"https://www.escenf.unam.edu.ar/"},
+  {"categoria":"Trámites y beneficios","titulo":"Ingreso","descripcion":"Información para ingresantes","url":"https://sites.google.com/view/sumar-enfermeria-telefonos/ingresantes"},
+  {"categoria":"Trámites y beneficios","titulo":"Boleto Educativo","descripcion":"Trámite del boleto estudiantil de Misiones","url":"https://www.boletoestudiantil.misiones.gov.ar/#/login"},
+  {"categoria":"Trámites y beneficios","titulo":"Progresar","descripcion":"Beca Progresar: requisitos e inscripción","url":"https://www.argentina.gob.ar/educacion/progresar"},
+  {"categoria":"Trámites y beneficios","titulo":"Trámites egresados","descripcion":"Pasos y requisitos para el título y otros trámites de egreso","url":"https://sites.google.com/view/sumar-enfermeria-telefonos/tr%C3%A1mites-egresados"},
+  {"categoria":"Comunidad Sumar","titulo":"Apuntes Sumar","descripcion":"Apuntes y material de estudio que comparte Sumar Enfermería","url":"https://sites.google.com/view/sumar-enfermeria-telefonos/apuntes-sumar-enfermer%C3%ADa"},
+  {"categoria":"Comunidad Sumar","titulo":"Grupos de WhatsApp","descripcion":"Grupos de WhatsApp por año y materia","url":"https://sites.google.com/view/sumar-enfermeria-telefonos/grupos-de-whatsapp"},
+  {"categoria":"Comunidad Sumar","titulo":"Teléfonos y correos","descripcion":"Contactos de la Escuela, departamentos y cátedras","url":"https://sites.google.com/view/sumar-enfermeria-telefonos/telefonos-y-correos"},
+  {"categoria":"Comunidad Sumar","titulo":"WhatsApp Sumar","descripcion":"Escribile directo a Sumar Enfermería","url":"https://wa.me/5493765080524"},
+  {"categoria":"Comunidad Sumar","titulo":"Instagram","descripcion":"@sumarenfermeria","url":"https://www.instagram.com/sumarenfermeria/"}
+];
+
+// Accesos rápidos
+document.getElementById('listaAccesos').innerHTML = CATEGORIAS.map(([cat, bajada]) => `<article class="card rev">
+  <h4>${cat}</h4><p class="bajada">${bajada}</p>
+  <ul>${ACCESOS.filter(a => a.categoria === cat).map(a =>
+    `<li><a href="${a.url}" target="_blank" rel="noopener"><b>${a.titulo}</b><span>${a.descripcion}</span></a></li>`).join('')}</ul>
+</article>`).join('');
 
 // Actividades y herramientas
 const enlace = ([txt, url]) => `<a class="ir" href="${url}"${url[0] === '#' ? '' : ' target="_blank" rel="noopener"'}>${txt} →</a>`;
@@ -644,7 +698,7 @@ const io = 'IntersectionObserver' in window ? new IntersectionObserver(es => es.
   if (e.isIntersecting) { e.target.classList.add('ver'); io.unobserve(e.target); } }), { threshold:.1 }) : null;
 document.querySelectorAll('.rev').forEach(el => io ? io.observe(el) : el.classList.add('ver'));
 
-const WA = '5493765124340';
+const WA = '5493765080524';
 const URL_SITIO = location.origin + location.pathname;
 
 // Buzón de propuestas.
