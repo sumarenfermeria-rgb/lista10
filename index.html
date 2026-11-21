@@ -4,15 +4,15 @@
 <meta charset="utf-8">
 <script>document.documentElement.classList.add('js')</script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Sumar Enfermería · Lista 10 · Elecciones 19 de noviembre</title>
-<meta name="description" content="Conocé a los candidatos y las propuestas de Sumar Enfermería, Lista 10, para la Asociación de Estudiantes de Enfermería UNaM. Votamos el 19 de noviembre.">
-<meta property="og:title" content="Sumar Enfermería · Lista 10">
-<meta property="og:description" content="Candidatos y propuestas para la Asociación de Estudiantes de Enfermería. El 19 de noviembre votá Lista 10.">
+<title>Sumar Enfermería · Gestión de la Asociación de Estudiantes de Enfermería</title>
+<meta name="description" content="Actividades, herramientas y buzón de propuestas de la gestión Sumar en la Asociación de Estudiantes de Enfermería UNaM.">
+<meta property="og:title" content="Sumar Enfermería · Gestión AEE">
+<meta property="og:description" content="Actividades, herramientas y buzón de propuestas de la Asociación de Estudiantes de Enfermería.">
 <meta property="og:type" content="website">
 <!-- Al publicar: reemplazar https://sumarenfermeria-rgb.github.io/lista10/ por la dirección final (https://usuario.github.io/repo/) -->
 <link rel="canonical" href="https://sumarenfermeria-rgb.github.io/lista10/">
 <meta property="og:url" content="https://sumarenfermeria-rgb.github.io/lista10/">
-<meta property="og:image" content="https://sumarenfermeria-rgb.github.io/lista10/img/og.jpg">
+<meta property="og:image" content="https://sumarenfermeria-rgb.github.io/lista10/img/og.jpg?v=2">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:locale" content="es_AR">
@@ -86,7 +86,7 @@ a{color:inherit}
 .nav ul .cta:hover{background:var(--verde-osc);color:#fff}
 .menu-btn{display:none;width:46px;height:46px;border:0;background:var(--crema);border-radius:12px;cursor:pointer;color:var(--texto)}
 .menu-btn svg{width:22px;height:22px}
-@media (max-width:1320px){
+@media (max-width:1180px){
   .menu-btn{display:grid;place-items:center}
   .nav ul{position:absolute;top:66px;left:0;right:0;flex-direction:column;background:var(--papel);padding:8px 20px 20px;box-shadow:0 12px 20px -12px rgba(0,0,0,.2);display:none}
   .nav ul.abierto{display:flex}
@@ -340,54 +340,58 @@ footer img{height:36px;width:auto}
   .marquesina div,.panel.activo{animation:none}
 }
 :focus-visible{outline:3px solid var(--rojo);outline-offset:3px}
+.nav .marca .n10,.nav .marca .n10::after{animation:none}
+.vivo-bar b{margin-right:4px}
+.act .cuando{font-family:'Archivo';font-weight:800;font-size:14px;text-transform:uppercase;letter-spacing:.05em;color:var(--rojo)}
+.card .ir{margin-top:auto;padding-top:6px;font-weight:800;color:var(--verde);text-decoration:none}
+.card .ir:hover{text-decoration:underline}
+.hero .elegi{max-width:560px}
+.vacio-act{grid-column:1/-1;margin:0;color:var(--texto-2);font-weight:600}
 </style>
 </head>
 <body>
 
 <nav class="nav" id="nav">
   <div class="wrap">
-    <a class="marca" href="#inicio" aria-label="Sumar Enfermería, Lista 10, ir al inicio">
-      <img class="iso" src="img/isotipo.webp" alt="" width="108" height="112"><img class="word" src="img/wordmark.webp" alt="Sumar Enfermería" width="637" height="64"><span class="n10">LISTA 10</span>
+    <a class="marca" href="#inicio" aria-label="Sumar Enfermería, ir al inicio">
+      <img class="iso" src="img/isotipo.webp" alt="" width="108" height="112"><img class="word" src="img/wordmark.webp" alt="Sumar Enfermería" width="637" height="64"><span class="n10">GESTIÓN</span>
     </a>
     <button class="menu-btn" id="menuBtn" aria-label="Abrir menú" aria-expanded="false" aria-controls="menu">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
     </button>
     <ul id="menu">
       <li><a href="#quienes">Quiénes somos</a></li>
+      <li><a href="#actividades">Actividades</a></li>
+      <li><a href="#herramientas">Herramientas</a></li>
       <li><a href="#propuestas">Propuestas</a></li>
-      <li><a href="#candidatos">Candidatos</a></li>
-      <li><a href="#padron">Padrón</a></li>
-      <li><a href="#sorteo">Sorteo</a></li>
-      <li><a href="#buzon">Buzón</a></li>
-      <li><a class="envivo" href="propuestas.html"><i></i>Tablero</a></li>
-      <li><a class="cta" href="#votar">Cómo votar</a></li>
+      <li><a href="#candidatos">Equipo</a></li>
+      <li><a class="cta" href="#buzon">Buzón</a></li>
     </ul>
   </div>
 </nav>
-<a class="vivo-bar" href="propuestas.html"><i></i><b>¡GRACIAS!</b> Ganamos. Ahora seguí lo que prometimos, propuesta por propuesta <span>→</span></a>
+<div class="vivo-bar"><b>¡GRACIAS POR EL APOYO!</b> Ahora nos toca trabajar para vos 💚</div>
 
 <header class="hero" id="inicio">
   <div class="wrap">
     <div class="izq">
-      <span class="cinta rojo este giro-1">Este</span>
+      <span class="cinta rojo este giro-1">¡Gracias!</span>
       <h1 class="titular hero-h1">
-        <span class="cinta verde fecha giro-3">19 de noviembre</span>
-        <span class="cinta crema v elegi giro-2">Elegí quién te representa</span>
-        <span class="cinta rojo vota giro-1">Votá</span>
-        <span class="cinta verde l10 giro-2">Lista 10</span>
+        <span class="cinta verde fecha giro-3">Empieza una nueva</span>
+        <span class="cinta rojo vota giro-1">Gestión</span>
+        <span class="cinta verde l10 giro-2">Sumar</span>
+        <span class="cinta crema v elegi giro-2">Asociación de Estudiantes de Enfermería</span>
       </h1>
-      <span class="sub">Elecciones de la Asociación de Estudiantes de Enfermería · UNaM<br>De 8 a 20 h · Escuela de Enfermería, López Torres y Mariano Moreno</span>
-      <div class="botones hero-btns"><a class="btn btn-rojo" href="#padron">¿Estoy en el padrón?</a><a class="btn btn-verde" href="#propuestas">Ver propuestas</a></div>
+      <span class="sub">Escuela de Enfermería · UNaM<br>López Torres y Mariano Moreno, Posadas</span>
+      <div class="botones hero-btns"><a class="btn btn-rojo" href="#buzon">Dejá tu propuesta</a><a class="btn btn-verde" href="#actividades">Ver actividades</a></div>
     </div>
     <div class="der">
       <div class="foto-recorte">
-        <div class="marco"><img src="img/fotos/kuz-rivero.jpg" alt="Facundo Kuz y Avril Rivero, candidatos a Coordinación y Secretaría General" width="731" height="1000"></div>
+        <div class="marco"><img src="img/fotos/kuz-rivero.jpg" alt="Facundo Kuz y Avril Rivero, Coordinación y Secretaría General" width="731" height="1000"></div>
         <div class="etiquetas">
           <span class="cinta crema v"><small>Coordinación</small>Facundo Kuz</span>
           <span class="cinta crema v"><small>Secretaría General</small>Avril Rivero</span>
         </div>
       </div>
-      <div class="cuenta" id="cuenta"><div class="txt" id="cPre">Faltan</div><div class="num" id="cDias">–</div><div class="txt" id="cTxt">días</div></div>
       <img class="curita-hero cur presenta" src="img/curita-presenta.webp" alt="" aria-hidden="true" width="300" height="381">
     </div>
   </div>
@@ -419,11 +423,31 @@ footer img{height:36px;width:auto}
   </div>
 </section>
 
+<section id="actividades">
+  <div class="wrap">
+    <div class="cabecera rev">
+      <span class="cinta rojo giro-2">Actividades</span>
+      <p>Lo que vamos haciendo en la Escuela. Todas las novedades, también en <a href="https://www.instagram.com/sumarenfermeria/" target="_blank" rel="noopener">@sumarenfermeria</a>.</p>
+    </div>
+    <div class="grilla" id="listaAct"></div>
+  </div>
+</section>
+
+<section id="herramientas">
+  <div class="wrap">
+    <div class="cabecera rev">
+      <span class="cinta verde giro-1">Herramientas</span>
+      <p>Todo lo que podés usar desde el celular.</p>
+    </div>
+    <div class="grilla" id="listaHerr"></div>
+  </div>
+</section>
+
 <section id="propuestas">
   <div class="wrap">
     <div class="cabecera rev">
-      <span class="cinta verde giro-3">¿Qué proponemos?</span>
-      <p>Cuatro ejes para sumar en toda la carrera. Tocá cada uno para ver el detalle.</p>
+      <span class="cinta verde giro-3">Nuestras propuestas</span>
+      <p>Los cuatro ejes que guían nuestra gestión. Tocá cada uno para ver el detalle.</p>
     </div>
     <div class="tabs rev" role="tablist" aria-label="Ejes de propuestas" id="tabs"></div>
     <div id="paneles"></div>
@@ -433,59 +457,10 @@ footer img{height:36px;width:auto}
 <section id="candidatos">
   <div class="wrap">
     <div class="cabecera rev">
-      <span class="cinta rojo giro-1">Candidatos</span>
-      <span class="cinta crema v giro-2" style="font-size:clamp(20px,2.6vw,28px)">Nuestro compromiso con vos</span>
+      <span class="cinta rojo giro-1">Nuestro equipo</span>
+      <span class="cinta crema v giro-2" style="font-size:clamp(20px,2.6vw,28px)">Quienes te representan</span>
     </div>
     <div class="equipo" id="equipo"></div>
-  </div>
-</section>
-
-<section id="padron">
-  <div class="wrap">
-    <div class="buscador rev">
-      <div class="cabecera" style="margin-bottom:18px">
-        <span class="cinta verde giro-1">¿Estás en el padrón?</span>
-        <p>Buscate con tu documento, o buscá a alguien por apellido y las primeras letras del nombre, y fijate si puede votar el 19. Tus datos no salen de tu celular.</p>
-      </div>
-      <div class="modo" role="group" aria-label="Buscar por">
-        <button type="button" class="on" data-m="dni" aria-pressed="true">Por DNI</button>
-        <button type="button" data-m="nombre" aria-pressed="false">Por apellido y nombre</button>
-      </div>
-      <form id="formNombre" autocomplete="off" hidden>
-        <label for="pAp" class="sr">Apellido</label>
-        <input id="pAp" placeholder="Apellido" maxlength="40" autocapitalize="words" autocorrect="off" spellcheck="false">
-        <label for="pNom" class="sr">Nombre</label>
-        <input id="pNom" placeholder="Nombre o sus primeras letras" maxlength="40" autocapitalize="words" autocorrect="off" spellcheck="false">
-        <button class="btn btn-rojo" id="btnBuscarN" type="submit">Buscar</button>
-      </form>
-      <form id="formPadron" autocomplete="off">
-        <label for="dni" class="sr">Número de documento</label>
-        <input id="dni" inputmode="numeric" pattern="[0-9.\s]*" placeholder="Ej: 45123456" maxlength="12" required>
-        <button class="btn btn-rojo" id="btnBuscar" type="submit">Buscar</button>
-      </form>
-      <div id="resPadron" class="res" aria-live="polite" hidden></div>
-      <p class="fuente">Padrón definitivo AEE 2026: estudiantes regulares activos de la Licenciatura en Enfermería, sede Posadas.</p>
-      <img class="curita-p cur idea" src="img/curita-idea.webp" alt="" aria-hidden="true" loading="lazy" width="240" height="417">
-    </div>
-  </div>
-</section>
-
-<section id="votar">
-  <div class="wrap">
-    <div class="cabecera rev">
-      <span class="cinta rojo giro-1">Cómo votar</span>
-      <p style="color:#D6E8DE">Votar te lleva un par de minutos. Te contamos todo lo que necesitás.</p>
-    </div>
-    <div class="pasos">
-      <div class="paso rev"><h4>Cuándo</h4><p><span class="dato">Jueves 19 de noviembre</span><br>De <span class="dato">8 a 20 h</span><br><a class="mapa" href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=Votar+Lista+10+%C2%B7+Sumar+Enfermer%C3%ADa&amp;dates=20261119T110000Z/20261119T230000Z&amp;details=Elecciones+de+la+Asociaci%C3%B3n+de+Estudiantes+de+Enfermer%C3%ADa.+Llev%C3%A1+tu+DNI+y+vot%C3%A1+Lista+10.&amp;location=Escuela+de+Enfermer%C3%ADa+UNaM%2C+L%C3%B3pez+Torres+y+Mariano+Moreno%2C+Posadas" target="_blank" rel="noopener">Agendarlo en el calendario →</a></p></div>
-      <div class="paso rev"><h4>Dónde</h4><p>Escuela de Enfermería, UNaM.<br><span class="dato">López Torres y Mariano Moreno</span><br><a class="mapa" href="https://www.google.com/maps/search/?api=1&amp;query=Escuela+de+Enfermer%C3%ADa+UNaM+L%C3%B3pez+Torres+y+Mariano+Moreno+Posadas" target="_blank" rel="noopener">Ver en el mapa →</a><br>Mesa según tu apellido: <span class="dato">A–F: 1</span> <span class="dato">G–M: 2</span> <span class="dato">N–Z: 3</span></p></div>
-      <div class="paso rev"><h4>Antes de ir</h4><p>Asegurate de estar en el padrón y asistí con tu <span class="dato">DNI</span>.<br><a class="mapa" href="#padron">Buscarme en el padrón →</a></p></div>
-      <div class="paso rev"><h4>A quién</h4><p>Buscá la boleta <span class="dato">Lista 10</span>: en la boleta figuramos como <span class="dato">Identidad Estudiantil</span>.</p></div>
-    </div>
-    <div class="boleta rev">
-      <a href="img/boleta-grande.jpg?v=2" target="_blank" rel="noopener" class="boleta-link" aria-label="Ver la boleta en grande"><img src="img/boleta.jpg?v=2" alt="Boleta Lista 10, Identidad Estudiantil, con la lista de titulares y suplentes" width="400" height="613" loading="lazy"><span>Tocá para ampliar</span></a>
-      <div><h3>Así es nuestra boleta</h3><p>Dice <b>Identidad Estudiantil</b>, con nuestro logo y el número <b>10</b> arriba a la derecha. Es la boleta de Sumar Enfermería, en blanco y negro.</p></div>
-    </div>
   </div>
 </section>
 
@@ -495,24 +470,9 @@ footer img{height:36px;width:auto}
       <span class="cinta verde giro-1">Sumate.</span>
       <span class="cinta rojo giro-2">Sumá tu idea.</span>
     </div>
-    <p>Estas propuestas son el comienzo. Queremos construir el resto con vos.</p>
+    <p>La gestión la construimos entre todos. Contanos qué ves, qué falta o qué se puede mejorar.</p>
   </div>
   <div class="wrap">
-    <div class="sorteo rev" id="sorteo">
-      <div class="sorteo-txt">
-        <span class="cinta rojo giro-1">Sorteo</span>
-        <h2 class="sorteo-t">Dejá tu mensaje y participá</h2>
-        <p>Entre quienes dejen una propuesta, comentario o inquietud en el buzón sorteamos:</p>
-        <ul class="sorteo-premios">
-          <li><b>2</b> cuadernos de prácticas de Sumar</li>
-          <li><b>2</b> vasos térmicos de Sumar para el verano</li>
-          <li><b>1</b> agenda para tus prácticas</li>
-        </ul>
-        <p class="sorteo-fecha">Sorteamos el <b>miércoles 18 de noviembre</b> y publicamos a los ganadores en nuestras historias de Instagram <a href="https://www.instagram.com/sumarenfermeria/" target="_blank" rel="noopener">@sumarenfermeria</a>.</p>
-        <a class="btn btn-rojo" href="#buzon">Quiero participar</a>
-      </div>
-      <img class="sorteo-img" src="img/premios.webp?v=2" alt="Premios: cuaderno de prácticas, dos vasos térmicos y una agenda de enfermería" width="878" height="420" loading="lazy">
-    </div>
     <form class="buzon rev" id="buzon" novalidate>
       <span class="cinta-adhesiva" aria-hidden="true"></span>
       <h2 class="buzon-t">Buzón de propuestas</h2>
@@ -536,12 +496,6 @@ footer img{height:36px;width:auto}
           <input id="bNombre" maxlength="60" placeholder="Podés dejarlo vacío" autocomplete="name">
         </div>
       </div>
-      <label class="check-sorteo"><input type="checkbox" id="bSorteo"><span>Quiero participar del sorteo</span></label>
-      <div class="campo-sorteo" id="bSorteoCampo" hidden>
-        <label class="campo" for="bContacto">Tu WhatsApp o Instagram, para avisarte si ganás</label>
-        <input id="bContacto" maxlength="60" placeholder="Ej: 3764 123456 o @tuusuario">
-        <small>Solo lo usamos para el sorteo. Si no participás, tu mensaje sigue siendo anónimo.</small>
-      </div>
       <button class="btn btn-rojo" type="submit" id="bEnviar">Enviar al buzón</button>
       <p class="buzon-nota" id="bNota" aria-live="polite"></p>
     </form>
@@ -556,12 +510,12 @@ footer img{height:36px;width:auto}
 </section>
 </main>
 
-<nav class="barra" aria-label="Accesos rápidos"><a href="#padron">Ver padrón</a><a href="propuestas.html" class="envivo"><i></i>Tablero</a></nav>
+<nav class="barra" aria-label="Accesos rápidos"><a href="#actividades">Actividades</a><a href="#buzon">Buzón</a></nav>
 
 <footer>
   <div class="wrap">
     <img src="img/logo-blanco.webp" alt="Sumar Enfermería" loading="lazy" width="51" height="36">
-    <span>Lista 10 · Elecciones de la Asociación de Estudiantes de Enfermería · UNaM 2026</span>
+    <span>Gestión Sumar · Asociación de Estudiantes de Enfermería · UNaM</span>
   </div>
 </footer>
 
@@ -606,7 +560,21 @@ const EQUIPO = [
   { cargo:'Secretaría de Impresiones y Apuntes', color:'verde', a:['Ana Antúnez','antunez'], b:['Lucas Lautharte','lautharte'] }
 ];
 
-const ELECCION = new Date('2026-11-19T08:00:00-03:00');
+/* Actividades: la más nueva arriba. link es opcional: [texto, dirección] */
+const ACTIVIDADES = [
+  { cuando:'18 de noviembre', titulo:'Sorteo del buzón de propuestas', texto:'Sorteamos premios entre las 119 personas que nos dejaron su propuesta, comentario o inquietud. Los ganadores salieron en nuestras historias.',
+    link:['Ver en Instagram','https://www.instagram.com/sumarenfermeria/'] },
+  { cuando:'16 de noviembre', titulo:'Taller de Manejo Integral de Heridas', texto:'Junto a Sumar Egresados, con la Lic. Evelyn Novo y el Lic. José Soto. Participaron más de 200 estudiantes.',
+    link:['Descargá tu certificado','https://sumarenfermeria-rgb.github.io/certificados-heridas/'] }
+];
+
+/* Herramientas: [título, para qué sirve, texto del link, dirección] */
+const HERRAMIENTAS = [
+  ['Buzón de propuestas','Dejanos una propuesta, necesidad o inquietud. Es anónimo.','Escribir al buzón','#buzon'],
+  ['Certificados','Buscá con tu DNI el certificado de los talleres a los que fuiste.','Taller de Heridas','https://sumarenfermeria-rgb.github.io/certificados-heridas/'],
+  ['Instagram','Fechas, avisos y todo lo que organizamos.','@sumarenfermeria','https://www.instagram.com/sumarenfermeria/'],
+  ['WhatsApp','¿Tenés una duda o necesitás una mano? Escribinos.','Escribinos','https://wa.me/5493765124340']
+];
 /* ============================== */
 
 // Propuestas
@@ -639,7 +607,15 @@ botones.forEach((b, i) => {
   });
 });
 
-// Candidatos
+// Actividades y herramientas
+const enlace = ([txt, url]) => `<a class="ir" href="${url}"${url[0] === '#' ? '' : ' target="_blank" rel="noopener"'}>${txt} →</a>`;
+document.getElementById('listaAct').innerHTML = ACTIVIDADES.length
+  ? ACTIVIDADES.map(a => `<article class="card act rev"><span class="cuando">${a.cuando}</span><h4>${a.titulo}</h4><p>${a.texto}</p>${a.link ? enlace(a.link) : ''}</article>`).join('')
+  : '<p class="vacio-act">Muy pronto, las primeras actividades.</p>';
+document.getElementById('listaHerr').innerHTML = HERRAMIENTAS.map(([t, d, txt, url]) =>
+  `<article class="card rev"><h4>${t}</h4><p>${d}</p>${enlace([txt, url])}</article>`).join('');
+
+// Equipo
 const persona = ([nombre, foto]) => `<figure><img src="img/fotos/${foto}.jpg" alt="${nombre}" loading="lazy" width="480" height="600"></figure>`;
 const etiqueta = ([nombre, , rol], defecto, color) => `<span class="cinta crema ${color==='verde'?'v':''}"><span class="rol">${rol || defecto}</span>${nombre}</span>`;
 document.getElementById('equipo').innerHTML = EQUIPO.map((c, i) => {
@@ -650,18 +626,6 @@ document.getElementById('equipo').innerHTML = EQUIPO.map((c, i) => {
     <div class="nombres">${etiqueta(c.a, 'Titular', c.color)}${etiqueta(c.b, 'Suplente', c.color)}</div>
   </article>`;
 }).join('');
-
-// Cuenta regresiva
-function tic(){
-  const ms = ELECCION - Date.now(), dias = Math.ceil(ms / 864e5);
-  const num = document.getElementById('cDias'), txt = document.getElementById('cTxt'), pre = document.getElementById('cPre');
-  const h = Math.ceil(ms / 36e5);
-  if (ms > 864e5) { pre.textContent = dias === 1 ? 'Falta' : 'Faltan'; num.textContent = dias; txt.textContent = dias === 1 ? 'día' : 'días'; }
-  else if (ms > 0) { pre.textContent = h === 1 ? 'Falta' : 'Faltan'; num.textContent = h; txt.textContent = h === 1 ? 'hora' : 'horas'; }
-  else if (ms > -12 * 36e5) { pre.textContent = ''; num.textContent = 'HOY'; txt.textContent = 'se vota'; }
-  else document.getElementById('cuenta').hidden = true;
-}
-tic(); setInterval(tic, 60000);
 
 // Menú móvil
 const menuBtn = document.getElementById('menuBtn'), menu = document.getElementById('menu');
@@ -680,140 +644,8 @@ const io = 'IntersectionObserver' in window ? new IntersectionObserver(es => es.
   if (e.isIntersecting) { e.target.classList.add('ver'); io.unobserve(e.target); } }), { threshold:.1 }) : null;
 document.querySelectorAll('.rev').forEach(el => io ? io.observe(el) : el.classList.add('ver'));
 
-// Mensaje para avisarle a un compañero que está en el padrón
-// Mesa según el apellido (el padrón está en orden alfabético): A–F mesa 1, G–M mesa 2, N–Z mesa 3
-const mesaDe = o => o <= 3094 ? 1 : o <= 5090 ? 2 : 3;
-const avisoWa = p => 'https://wa.me/?text=' + encodeURIComponent(`¡Hola ${p[2].split(' ')[0]}! 👋 Hoy votamos en las elecciones de la Asociación de Estudiantes de Enfermería 🗳️
-Me fijé y estás en el padrón: votás en la MESA ${mesaDe(p[0])} (Nº de orden ${p[0]}).
-🕗 Hasta las 20 h · 📍 Escuela de Enfermería · 🪪 Llevá tu DNI
-👉 https://sumarenfermeria-rgb.github.io/lista10/hoy.html`);
-// Padrón: cada registro está cifrado con el propio documento (PBKDF2 + AES-GCM).
-// Sin el número exacto no se puede leer nada; la lista completa nunca se publica.
-const S1 = new TextEncoder().encode('sumar-lista10-aee-2026|id'), S2 = new TextEncoder().encode('sumar-lista10-aee-2026|key');
-let padronP = null;
-const cargarPadron = () => padronP || (padronP = new Promise((ok, ko) => {
-  const s = document.createElement('script'); s.src = 'padron.js';
-  s.onload = () => ok(window.PADRON); s.onerror = ko; document.head.appendChild(s);
-}));
-let ITER = 20000;
-async function derivar(doc, sal, bytes){
-  const base = await crypto.subtle.importKey('raw', new TextEncoder().encode(doc), 'PBKDF2', false, ['deriveBits']);
-  return new Uint8Array(await crypto.subtle.deriveBits({ name:'PBKDF2', hash:'SHA-256', salt:sal, iterations:ITER }, base, bytes * 8));
-}
-async function buscarDoc(doc){
-  const P = await cargarPadron(); ITER = P.it || 20000;
-  const id = [...await derivar(doc, S1, 16)].map(b => b.toString(16).padStart(2, '0')).join('');
-  const blob = P.d[id]; if (!blob) return null;
-  const raw = Uint8Array.from(atob(blob), c => c.charCodeAt(0));
-  const key = await crypto.subtle.importKey('raw', await derivar(doc, S2, 32), 'AES-GCM', false, ['decrypt']);
-  return JSON.parse(new TextDecoder().decode(await crypto.subtle.decrypt({ name:'AES-GCM', iv:raw.slice(0, 12) }, key, raw.slice(12))));
-}
-const res = document.getElementById('resPadron'), inDni = document.getElementById('dni'), btnB = document.getElementById('btnBuscar');
 const WA = '5493765124340';
 const URL_SITIO = location.origin + location.pathname;
-const CAL = 'https://calendar.google.com/calendar/render?action=TEMPLATE&text=Votar+Lista+10+%C2%B7+Sumar+Enfermer%C3%ADa&dates=20261119T110000Z/20261119T230000Z&details=Elecciones+de+la+Asociaci%C3%B3n+de+Estudiantes+de+Enfermer%C3%ADa.+Llev%C3%A1+tu+DNI+y+vot%C3%A1+Lista+10.&location=Escuela+de+Enfermer%C3%ADa+UNaM%2C+L%C3%B3pez+Torres+y+Mariano+Moreno%2C+Posadas';
-const ICONO_WA = '<svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.6.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6a2.7 2.7 0 0 0 1.8-1.2 2.2 2.2 0 0 0 .1-1.2c0-.1-.2-.2-.4-.3Z"/></svg>';
-const puntos = d => d.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
-function mostrar(clase, html){ res.className = 'res ' + clase; res.innerHTML = html; res.hidden = false; }
-inDni.addEventListener('focus', () => cargarPadron().catch(() => {}), { once:true });
-
-// Búsqueda por apellido (con tolerancia a errores de tipeo) + primeras letras del nombre.
-// padron-nombres.js trae solo apellido, nombres y n.º de orden: nunca el DNI. El padrón lo publicó la Junta Electoral.
-const fNom = document.getElementById('formNombre'), fDni = document.getElementById('formPadron');
-document.querySelectorAll('.modo button').forEach(b => b.addEventListener('click', () => {
-  document.querySelectorAll('.modo button').forEach(x => { x.classList.toggle('on', x === b); x.setAttribute('aria-pressed', x === b); });
-  const n = b.dataset.m === 'nombre'; fNom.hidden = !n; fDni.hidden = n; res.hidden = true;
-  (n ? document.getElementById('pAp') : inDni).focus();
-  if (n) cargarNombres().catch(() => {});
-}));
-let nombresP = null;
-const cargarNombres = () => nombresP || (nombresP = new Promise((ok, ko) => {
-  const s = document.createElement('script'); s.src = 'padron-nombres.js?v=2';
-  s.onload = () => ok(window.PADRON_N); s.onerror = () => { nombresP = null; ko(); }; document.head.appendChild(s);
-}));
-const NO_CUENTA = new Set(['de','del','la','las','los','y','da','di','do','dos','van','von','e']);
-const palabras = t => (t || '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '')
-  .split(/[^a-z]+/).filter(w => w.length > 1 && !NO_CUENTA.has(w));
-// Cómo suena (español rioplatense): z/s/ce/ci, v/b, ll/y, h muda, qu/k/c, gue/gui…
-const suena = w => w.replace(/h/g, '').replace(/qu/g, 'k').replace(/c([ei])/g, 's$1').replace(/[ckq]/g, 'k')
-  .replace(/z/g, 's').replace(/v/g, 'b').replace(/ll/g, 'y').replace(/w/g, 'gu').replace(/x/g, 'ks').replace(/(.)\1/g, '$1');
-function dist(a, b){            // Damerau-Levenshtein (con transposición de letras vecinas)
-  const m = a.length, n = b.length, d = [];
-  for (let i = 0; i <= m; i++){ d[i] = [i]; } for (let j = 1; j <= n; j++) d[0][j] = j;
-  for (let i = 1; i <= m; i++) for (let j = 1; j <= n; j++){
-    const c = a[i-1] === b[j-1] ? 0 : 1;
-    d[i][j] = Math.min(d[i-1][j] + 1, d[i][j-1] + 1, d[i-1][j-1] + c);
-    if (i > 1 && j > 1 && a[i-1] === b[j-2] && a[i-2] === b[j-1]) d[i][j] = Math.min(d[i][j], d[i-2][j-2] + 1);
-  }
-  return d[m][n];
-}
-// Qué tan parecido es lo que escribió con un apellido del padrón: 0 = igual; 1-2 = parecido; null = no.
-function parecido(esc, ap){
-  if (esc === ap) return 0;
-  const a = suena(esc), b = suena(ap);
-  if (a === b) return .5;
-  const tope = esc.length <= 4 ? 1 : esc.length <= 7 ? 2 : 3, x = Math.min(dist(esc, ap), dist(a, b) + .5);
-  return x <= tope ? x : null;
-}
-let PER = null;   // personas preparadas: [orden, apellido, nombres, palabras del apellido, palabras del nombre]
-const esc = t => String(t).replace(/[&<>"]/g, c => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;' }[c]));
-const btnN = document.getElementById('btnBuscarN');
-fNom.addEventListener('submit', async ev => {
-  ev.preventDefault();
-  const apT = document.getElementById('pAp').value.trim(), noT = document.getElementById('pNom').value.trim();
-  const A = palabras(apT).slice(0, 2), N = (noT.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').match(/[a-z]+/g) || []).slice(0, 2);
-  if (!A.length || !N.length) { mostrar('no', '<h3>Completá los dos campos</h3><p>Escribí el apellido y el nombre, o al menos sus primeras letras (por ejemplo: Gómez · Ma).</p>'); return; }
-  btnN.disabled = true; btnN.textContent = 'Buscando…';
-  try {
-    const P = await cargarNombres();
-    if (!PER) PER = P.d.map(([o, a, n]) => [o, a, n, palabras(a), palabras(n)]);
-    const cache = new Map(), hall = [];
-    for (const p of PER){
-      // cada palabra del apellido escrito tiene que parecerse a alguna del apellido real
-      let tot = 0, ok = true;
-      for (const w of A){
-        let mejor = null;
-        for (const ap of p[3]){ const k = w + '|' + ap; if (!cache.has(k)) cache.set(k, parecido(w, ap)); const v = cache.get(k); if (v !== null && (mejor === null || v < mejor)) mejor = v; }
-        if (mejor === null){ ok = false; break; } tot += mejor;
-      }
-      // y cada palabra del nombre escrito tiene que ser el comienzo de alguno de sus nombres
-      const empieza = (n, w) => n.startsWith(w) || suena(n).startsWith(suena(w));
-      if (ok && N.every(w => p[4].some(n => empieza(n, w)))) hall.push([tot + (p[4][0] && empieza(p[4][0], N[0]) ? 0 : .25), p]);
-    }
-    hall.sort((x, y) => x[0] - y[0] || x[1][1].localeCompare(y[1][1]) || x[1][0] - y[1][0]);
-    const exactos = hall.filter(h => h[0] < .5).length, MAX = 12;
-    if (hall.length) mostrar('si', `<h3>${hall.length === 1 ? '¡Encontramos a una persona!' : `Encontramos ${hall.length} personas`}</h3>
-      ${exactos < hall.length ? '<p>Te mostramos también apellidos parecidos, por si está escrito distinto.</p>' : ''}
-      <ul class="lista-n">${hall.slice(0, MAX).map(([, p]) => `<li><span>${esc(p[1])}, ${esc(p[2])}<br><span class="mesa-b">Mesa ${mesaDe(p[0])}</span><span class="o">Nº de orden ${p[0]}</span></span><a class="btn btn-wa" target="_blank" rel="noopener" href="${avisoWa(p)}">Avisale</a></li>`).join('')}</ul>
-      ${hall.length > MAX ? `<p style="margin-bottom:10px">Hay ${hall.length - MAX} más: escribí más letras del nombre para achicar la lista.</p>` : ''}
-      <p>El jueves 19, de 8 a 20 h, en la Escuela de Enfermería, con el DNI. Votá <b>Lista 10</b>. 💚</p>
-      <div class="acciones"><a class="btn btn-verde" href="${CAL}" target="_blank" rel="noopener">Agendar el 19</a></div>`);
-    else mostrar('no', `<h3>No encontramos a ${esc(apT)}, ${esc(noT)}</h3>
-      <p>Probá con menos letras del nombre, revisá el apellido o buscá con el DNI. Si igual no aparece, escribinos y te ayudamos con el reclamo.</p>
-      <a class="btn btn-verde wa" href="https://wa.me/${WA}?text=${encodeURIComponent('Hola! Busqué en el padrón de las elecciones AEE 2026 y no figuro. ¿Me ayudan con el reclamo?')}" target="_blank" rel="noopener">${ICONO_WA}Escribinos por WhatsApp</a>`);
-  } catch (e) {
-    mostrar('no', '<h3>No pudimos buscar</h3><p>Revisá tu conexión a internet y probá de nuevo.</p>');
-  } finally { btnN.disabled = false; btnN.textContent = 'Buscar'; }
-});
-document.getElementById('formPadron').addEventListener('submit', async ev => {
-  ev.preventDefault();
-  const doc = inDni.value.replace(/\D/g, '').replace(/^0+/, '');
-  if (doc.length < 6) { mostrar('no', '<h3>Revisá el número</h3><p>Escribí tu documento completo, solo números (por ejemplo 45123456).</p>'); return; }
-  btnB.disabled = true; btnB.textContent = 'Buscando…';
-  try {
-    const r = await buscarDoc(doc);
-    if (r) mostrar('si', `<h3>¡Sí, estás en el padrón!</h3>
-      <div class="pills">${r.map(x => `<span class="mesa-p">Mesa ${mesaDe(x.o)}</span><span>${x.t} <b>${puntos(doc)}</b></span><span>Nº de orden <b>${x.o}</b></span>`).join('')}</div>
-      <p>El jueves 19, de 8 a 20 h, andá a la Escuela de Enfermería con tu DNI y votá <b>Lista 10</b>. 💚</p>
-      <div class="acciones"><a class="btn btn-verde" href="${CAL}" target="_blank" rel="noopener">Agendar el 19</a><a class="btn btn-rojo wa" href="https://wa.me/?text=${encodeURIComponent('Ya me fijé y estoy en el padrón para votar el 19 💚 Fijate vos acá: ' + URL_SITIO + '#padron')}" target="_blank" rel="noopener">${ICONO_WA}Avisale a tu curso</a></div>`);
-    else mostrar('no', `<h3>No encontramos el ${puntos(doc)}</h3>
-      <p>Revisá que el número esté bien. Si lo está, escribinos y te ayudamos con el reclamo para que te incluyan antes del 19.</p>
-      <a class="btn btn-verde wa" href="https://wa.me/${WA}?text=${encodeURIComponent(`Hola! Busqué mi documento ${puntos(doc)} en el padrón de las elecciones AEE 2026 y no figuro. ¿Me ayudan con el reclamo?`)}" target="_blank" rel="noopener">${ICONO_WA}Escribinos por WhatsApp</a>`);
-  } catch (e) {
-    if (!window.crypto || !crypto.subtle) mostrar('no', '<h3>Tu navegador no puede buscar</h3><p>Abrí este link en Chrome o Safari (no dentro de otra app) y probá de nuevo.</p>');
-    else mostrar('no', '<h3>No pudimos buscar</h3><p>Revisá tu conexión a internet y probá de nuevo.</p>');
-  } finally { btnB.disabled = false; btnB.textContent = 'Buscar'; }
-});
 
 // Buzón de propuestas.
 // Si BUZON.url tiene la dirección "formResponse" de un Formulario de Google (y los IDs de sus preguntas),
@@ -821,21 +653,13 @@ document.getElementById('formPadron').addEventListener('submit', async ev => {
 const BUZON = { url:'https://docs.google.com/forms/d/e/1FAIpQLSdmqDWNSzZMjH5Wsq9943r0TIrBdBBvQpunkHFPOLBQQfZElQ/formResponse',
   campos:{ tipo:'entry.558434914', mensaje:'entry.1995672025', anio:'entry.1199842249', nombre:'entry.1868286662' } };
 const fBuzon = document.getElementById('buzon'), bNota = document.getElementById('bNota'), bEnviar = document.getElementById('bEnviar');
-const bSorteo = document.getElementById('bSorteo');
-bSorteo.addEventListener('change', () => { document.getElementById('bSorteoCampo').hidden = !bSorteo.checked; if (bSorteo.checked) document.getElementById('bContacto').focus(); });
 if (!BUZON.url) bEnviar.textContent = 'Enviar por WhatsApp';
 fBuzon.addEventListener('submit', async ev => {
   ev.preventDefault();
   const tipo = fBuzon.querySelector('input[name=tipo]:checked').value;
   const msg = document.getElementById('bMsg').value.trim();
   const anio = document.getElementById('bAnio').value;
-  let nombre = document.getElementById('bNombre').value.trim();
-  if (bSorteo.checked) {
-    const contacto = document.getElementById('bContacto').value.trim();
-    if (contacto.length < 4) { bNota.className = 'buzon-nota error'; bNota.textContent = 'Para el sorteo, dejanos tu WhatsApp o Instagram.'; document.getElementById('bContacto').focus(); return; }
-    if (!nombre) { bNota.className = 'buzon-nota error'; bNota.textContent = 'Para el sorteo, poné también tu nombre.'; document.getElementById('bNombre').focus(); return; }
-    nombre = `SORTEO · ${nombre} · ${contacto}`;
-  }
+  const nombre = document.getElementById('bNombre').value.trim();
   if (msg.length < 5) { bNota.className = 'buzon-nota error'; bNota.textContent = 'Escribí tu mensaje antes de enviarlo.'; document.getElementById('bMsg').focus(); return; }
   if (BUZON.url) {
     const datos = new URLSearchParams();
@@ -845,7 +669,7 @@ fBuzon.addEventListener('submit', async ev => {
     bEnviar.disabled = true; bEnviar.textContent = 'Enviando…';
     try {
       await fetch(BUZON.url, { method:'POST', mode:'no-cors', body:datos });
-      fBuzon.reset(); document.getElementById('bSorteoCampo').hidden = true; bNota.className = 'buzon-nota ok'; bNota.textContent = '¡Gracias! Tu mensaje llegó al buzón. 💚';
+      fBuzon.reset(); bNota.className = 'buzon-nota ok'; bNota.textContent = '¡Gracias! Tu mensaje llegó al buzón. 💚';
     } catch (e) { bNota.className = 'buzon-nota error'; bNota.textContent = 'No se pudo enviar. Revisá tu conexión y probá de nuevo.'; }
     finally { bEnviar.disabled = false; bEnviar.textContent = 'Enviar al buzón'; }
   } else {
@@ -869,7 +693,7 @@ curitas.forEach(c => c.addEventListener('click', () => {
 
 // Compartir
 document.getElementById('btnCompartir').addEventListener('click', async () => {
-  const datos = { title:'Sumar Enfermería · Lista 10', text:'Conocé las propuestas y candidatos de la Lista 10. El 19 de noviembre votamos 💚❤️', url:URL_SITIO };
+  const datos = { title:'Sumar Enfermería', text:'Actividades, certificados y buzón de propuestas de la Asociación de Estudiantes de Enfermería 💚❤️', url:URL_SITIO };
   if (navigator.share) { try { await navigator.share(datos); } catch(e){} }
   else location.href = 'https://wa.me/?text=' + encodeURIComponent(datos.text + ' ' + datos.url);
 });
